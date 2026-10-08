@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Goianeiro · OG card</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
+<style>
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: #0d0b09; }
+  .card { position: relative; width: 1200px; height: 630px; display: grid; place-items: center; text-align: center; color: #d4a548; }
+  .card::before { content: ""; position: absolute; inset: -20px; background: url("../assets/img/buffet-overhead-1600.webp") center / cover; filter: blur(5px) brightness(.32) saturate(1.1); }
+  .card::after { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(13,11,9,.15), rgba(13,11,9,.85) 75%); }
+  .inner { position: relative; z-index: 1; display: grid; justify-items: center; }
+  svg { width: 170px; }
+  .word { font: 600 92px/1 "Fraunces", serif; font-variation-settings: "opsz" 72; letter-spacing: .14em; padding-left: .14em; color: #f3e8d2; margin-top: 22px; }
+  .rule { display: flex; align-items: center; gap: 14px; margin-top: 18px; font: 600 17px/1 "Archivo"; font-variation-settings: "wdth" 125; letter-spacing: .5em; padding-left: .5em; }
+  .rule::before, .rule::after { content: ""; width: 70px; height: 1px; background: currentColor; opacity: .7; }
+  .tag { margin-top: 18px; font: italic 300 30px/1 "Fraunces", serif; color: #efcd85; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="inner">
+    <svg viewBox="0 0 200 190" fill="#d4a548"><use href="export/goianeiro-mark-gold.svg#" /></svg>
+    <div class="word">GOIANEIRO</div>
+    <div class="rule"><img src="export/flag-us.svg" width="26" alt="">RESTAURANTE · KIRKLAND, WA<img src="export/flag-br.svg" width="26" alt=""></div>
+    <div class="tag">Minas e Goiás · Sabor de casa</div>
+  </div>
+</div>
+<script>
+  // inline the mark so it renders without cross-file <use>
+  fetch('export/goianeiro-mark-gold.svg').then(r => r.text()).then(t => { document.querySelector('.inner svg').outerHTML = t.replace('<svg ', '<svg style="width:170px" '); });
+</script>
+</body>
+</html>

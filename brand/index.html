@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Goianeiro · Identidade visual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
+<style>
+  :root { --ink: #0d0b09; --gold: #d4a548; --gold-2: #efcd85; --cream: #f3e8d2; --wood: #2b1c12; --oxblood: #7d2419; --green: #2f6b3f; --line: rgba(239,205,133,.18); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ink); color: var(--cream); font: 15px/1.5 "Archivo", sans-serif; }
+  .export body, html.export { background: transparent; }
+  header.sheet-head { padding: 48px 56px 8px; }
+  header.sheet-head h1 { font: 400 2.4rem/1 "Fraunces", serif; margin: 0 0 .4rem; }
+  header.sheet-head p { margin: 0; color: #9a8c74; }
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 32px 56px 56px; }
+  .tile { border: 1px solid var(--line); min-height: 420px; display: grid; place-items: center; position: relative; padding: 40px; }
+  .tile--cream { background: var(--cream); color: var(--wood); border-color: transparent; }
+  .tile--wide { grid-column: 1 / -1; min-height: 260px; }
+  .label { position: absolute; left: 16px; top: 12px; font: 600 .66rem/1 "Archivo"; letter-spacing: .22em; text-transform: uppercase; color: #9a8c74; }
+  .tile--cream .label { color: #7a6a52; }
+
+  /* ---------- the logo system ---------- */
+  .lockup { display: inline-flex; color: var(--gold); }
+  .tile--cream .lockup { color: var(--wood); }
+  .tile--cream .lockup .accent { color: var(--oxblood); }
+
+  .v { flex-direction: column; align-items: center; text-align: center; padding: 8px; }
+  .v .mark { width: 150px; }
+  .word { font-family: "Fraunces", serif; font-variation-settings: "opsz" 72; font-weight: 600; letter-spacing: .14em; line-height: 1; color: var(--cream); padding-left: .14em; }
+  .tile--cream .word { color: var(--wood); }
+  .v .word { font-size: 64px; margin-top: 18px; }
+  .rule { display: flex; align-items: center; gap: 12px; margin-top: 14px; font: 600 13px/1 "Archivo"; font-variation-settings: "wdth" 125; letter-spacing: .5em; padding-left: .5em; }
+  .rule::before, .rule::after { content: ""; width: 54px; height: 1px; background: currentColor; opacity: .7; }
+  .flag-mark { width: 24px; height: auto; flex: none; border-radius: 2px; }
+  .h .sub { display: flex; align-items: center; gap: 8px; }
+  .h .sub .flag-mark { width: 20px; }
+  .tag { margin-top: 14px; font: italic 300 22px/1 "Fraunces", serif; }
+  .tag .accent { color: var(--gold-2); }
+
+  .h { align-items: center; gap: 20px; }
+  .h .mark { width: 92px; }
+  .h .stack { display: grid; gap: 10px; justify-items: start; }
+  .h .word { font-size: 48px; }
+  .h .sub { font: 600 12px/1 "Archivo"; font-variation-settings: "wdth" 125; letter-spacing: .52em; padding-left: .3em; }
+  .h .divider { width: 1px; align-self: stretch; background: currentColor; opacity: .45; }
+
+  .seal { width: 320px; height: 320px; }
+  .mark-only { width: 220px; color: var(--gold); }
+  .tile--cream .mark-only { color: var(--wood); }
+  .app-icon { width: 180px; height: 180px; border-radius: 40px; background: var(--ink); display: grid; place-items: center; color: var(--gold); box-shadow: 0 0 0 1px var(--line); }
+  .app-icon svg { width: 120px; }
+
+  .palette { display: flex; gap: 14px; flex-wrap: wrap; }
+  .chip { width: 130px; }
+  .chip i { display: block; height: 90px; border-radius: 4px; box-shadow: 0 0 0 1px var(--line); }
+  .chip b { display: block; margin-top: 8px; font: 500 14px/1.2 "Fraunces", serif; }
+  .chip span { font-size: 12px; color: #9a8c74; }
+
+  /* export mode: ?export=<id> shows only that element on transparent bg */
+  html.export header.sheet-head, html.export .label { display: none; }
+  html.export .grid { display: block; padding: 0; }
+  html.export .tile { border: 0; min-height: 0; padding: 24px; background: transparent; display: none; }
+  html.export .tile.on { display: inline-grid; }
+</style>
+</head>
+<body>
+
+<!-- ===== Goianeiro mark — the single source of truth for the symbol ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <mask id="g-face" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="190">
+      <rect width="200" height="190" fill="#fff"/>
+      <path d="M58 97c18 4 30 6 42 6s24-2 42-6" fill="none" stroke="#000" stroke-width="3.5"/>
+      <path d="M100 112l8 11-8 11-8-11Z" fill="#000"/>
+      <path d="M78 116l14 20M122 116l-14 20" stroke="#000" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="90" cy="160" rx="4.5" ry="5.5" fill="#000"/><ellipse cx="110" cy="160" rx="4.5" ry="5.5" fill="#000"/>
+    </mask>
+    <symbol id="g-mark" viewBox="0 0 200 190">
+      <path d="M78 76a22 22 0 0 1 44 0z" fill="currentColor"/>
+      <path d="M100 46V34M80 54l-7-7M120 54l7-7M70 70h-9M130 70h9" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"/>
+      <path d="M8 26C20 84 60 102 100 102S180 84 192 26C172 70 140 86 100 86S28 70 8 26Z" fill="currentColor"/>
+      <g mask="url(#g-face)" fill="currentColor">
+        <path d="M60 96h80c-1 22-9 38-13 52-4 16-12 26-27 26s-23-10-27-26c-4-14-12-30-13-52Z"/>
+        <path d="M62 106c-18-6-34-2-44 10 14 10 32 10 46 2Z"/>
+        <path d="M138 106c18-6 34-2 44 10-14 10-32 10-46 2Z"/>
+      </g>
+    </symbol>
+    <symbol id="g-flag-us" viewBox="0 0 19 13">
+      <clipPath id="fc-us"><rect width="19" height="13" rx="1.6"/></clipPath>
+      <g clip-path="url(#fc-us)">
+        <rect width="19" height="13" fill="#b22234"/>
+        <path d="M0 1.5h19M0 3.5h19M0 5.5h19M0 7.5h19M0 9.5h19M0 11.5h19" stroke="#fff" stroke-width="1"/>
+        <rect width="8.6" height="7" fill="#3c3b6e"/>
+        <g fill="#fff"><circle cx="1.6" cy="1.3" r=".5"/><circle cx="3.6" cy="1.3" r=".5"/><circle cx="5.6" cy="1.3" r=".5"/><circle cx="7.6" cy="1.3" r=".5"/><circle cx="2.6" cy="3.5" r=".5"/><circle cx="4.6" cy="3.5" r=".5"/><circle cx="6.6" cy="3.5" r=".5"/><circle cx="1.6" cy="5.7" r=".5"/><circle cx="3.6" cy="5.7" r=".5"/><circle cx="5.6" cy="5.7" r=".5"/><circle cx="7.6" cy="5.7" r=".5"/></g>
+      </g>
+    </symbol>
+    <symbol id="g-flag-br" viewBox="0 0 19 13">
+      <clipPath id="fc-br"><rect width="19" height="13" rx="1.6"/></clipPath>
+      <g clip-path="url(#fc-br)">
+        <rect width="19" height="13" fill="#009c3b"/>
+        <path d="M9.5 1.6 17.2 6.5 9.5 11.4 1.8 6.5Z" fill="#ffdf00"/>
+        <circle cx="9.5" cy="6.5" r="3" fill="#002776"/>
+        <path d="M6.6 5.9c2-.6 4-.4 5.8.8" stroke="#fff" stroke-width=".55" fill="none"/>
+      </g>
+    </symbol>
+    <symbol id="g-star" viewBox="0 0 10 10"><path d="M5 0l1.5 3.5L10 5 6.5 6.5 5 10 3.5 6.5 0 5l3.5-1.5Z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+
+<header class="sheet-head">
+  <h1>Goianeiro — identidade visual</h1>
+  <p>Evolução da logo original: o touro, o sol do cerrado, o dourado e “Minas e Goiás · Sabor de casa”, redesenhados em vetor para web, impressão e redes sociais.</p>
+</header>
+
+<div class="grid">
+  <!-- Vertical / primary -->
+  <section class="tile" id="vertical">
+    <span class="label">Logo principal</span>
+    <div class="lockup v">
+      <svg class="mark" viewBox="0 0 200 190" role="img" aria-label="Goianeiro"><use href="#g-mark"/></svg>
+      <div class="word">GOIANEIRO</div>
+      <div class="rule"><svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Estados Unidos"><use href="#g-flag-us"/></svg>RESTAURANTE<svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Brasil"><use href="#g-flag-br"/></svg></div>
+      <div class="tag">Minas e Goiás · <span class="accent">Sabor de casa</span></div>
+    </div>
+  </section>
+  <section class="tile tile--cream" id="vertical-dark">
+    <span class="label">Logo principal · fundo claro</span>
+    <div class="lockup v">
+      <svg class="mark" viewBox="0 0 200 190" role="img" aria-label="Goianeiro"><use href="#g-mark"/></svg>
+      <div class="word">GOIANEIRO</div>
+      <div class="rule"><svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Estados Unidos"><use href="#g-flag-us"/></svg>RESTAURANTE<svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Brasil"><use href="#g-flag-br"/></svg></div>
+      <div class="tag">Minas e Goiás · <span class="accent">Sabor de casa</span></div>
+    </div>
+  </section>
+
+  <!-- Horizontal -->
+  <section class="tile tile--wide" id="horizontal">
+    <span class="label">Logo horizontal · site, fachada, cardápio</span>
+    <div class="lockup h">
+      <svg class="mark" viewBox="0 0 200 190" role="img" aria-label="Goianeiro"><use href="#g-mark"/></svg>
+      <span class="divider"></span>
+      <div class="stack"><div class="word">GOIANEIRO</div><div class="sub"><svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Estados Unidos"><use href="#g-flag-us"/></svg><svg class="flag-mark" viewBox="0 0 19 13" role="img" aria-label="Brasil"><use href="#g-flag-br"/></svg> RESTAURANTE · MINAS &amp; GOIÁS</div></div>
+    </div>
+  </section>
+
+  <!-- Seal -->
+  <section class="tile" id="seal">
+    <span class="label">Selo · redes sociais, embalagens, adesivos</span>
+    <svg class="seal" viewBox="0 0 320 320" role="img" aria-label="Selo Goianeiro Restaurante, Minas e Goiás, Sabor de casa">
+      <defs>
+        <path id="seal-top" d="M40 160a120 120 0 0 1 240 0"/>
+        <path id="seal-bot" d="M34 160a126 126 0 0 0 252 0"/>
+      </defs>
+      <circle cx="160" cy="160" r="156" fill="#0d0b09"/>
+      <circle cx="160" cy="160" r="150" fill="none" stroke="#d4a548" stroke-width="1.5"/>
+      <circle cx="160" cy="160" r="96" fill="none" stroke="#d4a548" stroke-width="1"/>
+      <text fill="#f3e8d2" font-family="Fraunces, serif" font-size="26" font-weight="600" letter-spacing="6"><textPath href="#seal-top" startOffset="50%" text-anchor="middle">GOIANEIRO</textPath></text>
+      <text fill="#d4a548" font-family="Archivo, sans-serif" font-size="12.5" font-weight="600" letter-spacing="5.5"><textPath href="#seal-bot" startOffset="50%" text-anchor="middle">MINAS E GOIÁS · SABOR DE CASA</textPath></text>
+      <rect x="7" y="149" width="32" height="22.4" fill="#0d0b09"/>
+      <rect x="281" y="149" width="32" height="22.4" fill="#0d0b09"/>
+      <use href="#g-flag-us" x="11" y="152" width="24" height="16.4"/>
+      <use href="#g-flag-br" x="285" y="152" width="24" height="16.4"/>
+      <use href="#g-mark" x="98" y="100" width="124" height="118" color="#d4a548"/>
+    </svg>
+  </section>
+
+  <!-- Mark -->
+  <section class="tile tile--cream" id="mark">
+    <span class="label">Símbolo</span>
+    <svg class="mark-only" viewBox="0 0 200 190" role="img" aria-label="Goianeiro"><use href="#g-mark"/></svg>
+  </section>
+
+  <section class="tile" id="icon">
+    <span class="label">Ícone · favicon / app / perfil</span>
+    <div class="app-icon"><svg viewBox="0 0 200 190"><use href="#g-mark"/></svg></div>
+  </section>
+
+  <section class="tile" id="palette">
+    <span class="label">Paleta</span>
+    <div class="palette">
+      <div class="chip"><i style="background:#0d0b09"></i><b>Carvão</b><span>#0D0B09</span></div>
+      <div class="chip"><i style="background:#d4a548"></i><b>Ouro</b><span>#D4A548</span></div>
+      <div class="chip"><i style="background:#efcd85"></i><b>Ouro claro</b><span>#EFCD85</span></div>
+      <div class="chip"><i style="background:#f3e8d2"></i><b>Creme</b><span>#F3E8D2</span></div>
+      <div class="chip"><i style="background:#2b1c12"></i><b>Madeira</b><span>#2B1C12</span></div>
+      <div class="chip"><i style="background:#7d2419"></i><b>Vinho</b><span>#7D2419</span></div>
+    </div>
+  </section>
+</div>
+
+<script>
+  // ?export=<tile id> isolates one asset on a transparent background (used to render PNGs)
+  const id = new URLSearchParams(location.search).get('export');
+  if (id) { document.documentElement.classList.add('export'); document.getElementById(id)?.classList.add('on'); }
+</script>
+</body>
+</html>

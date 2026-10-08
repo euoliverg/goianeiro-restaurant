@@ -1,0 +1,4 @@
+# originals / local tooling (not part of the site)
+_source/
+.claude/
+.prof*/
