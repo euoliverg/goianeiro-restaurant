@@ -65,8 +65,13 @@
   "sameAs": ["https://www.instagram.com/goianeiro_/"],
   "hasMenu": {
     "@type": "Menu",
-    "name": "Brazilian Burgers",
+    "name": "Goianeiro Menu",
     "hasMenuSection": [
+      {"@type": "MenuSection", "name": "House Plates", "hasMenuItem": [
+        {"@type": "MenuItem", "name": "Prato com Espetinho", "description": "Grilled beef skewer with rice, beans, pasta, lettuce and tomato, fried cassava and torresmo."},
+        {"@type": "MenuItem", "name": "Na Chapa", "description": "Sliced steak and onions on a sizzling cast-iron plate with fries and melted cheese."},
+        {"@type": "MenuItem", "name": "Marmita de Churrasco", "description": "Sliced churrasco, sausage and roast chicken with fried cassava, rice, pasta and collard greens, to go."}
+      ]},
       {"@type": "MenuSection", "name": "Craft Burgers", "hasMenuItem": [
         {"@type": "MenuItem", "name": "X-Tudo", "description": "Bun, 2 burger patties, mozzarella, ham, bacon, sausage, sirloin cap (picanha), egg, corn, lettuce, tomato and pineapple.", "offers": {"@type": "Offer", "price": "20", "priceCurrency": "USD"}},
         {"@type": "MenuItem", "name": "X-Bacon", "description": "Bun, burger patty, mozzarella, ham, bacon and sausage.", "offers": {"@type": "Offer", "price": "15", "priceCurrency": "USD"}},
@@ -228,8 +233,8 @@
 <!-- ================= MARQUEE ================= -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee__track">
-    <span>Pão de queijo</span><i>✦</i><span>Feijão tropeiro</span><i>✦</i><span>Torresmo</span><i>✦</i><span>Mandioca frita</span><i>✦</i><span>Churrasco na brasa</span><i>✦</i><span>Couve refogada</span><i>✦</i><span>Pudim de leite</span><i>✦</i><span>X-Tudo</span><i>✦</i><span>Café com leite</span><i>✦</i>
-    <span>Pão de queijo</span><i>✦</i><span>Feijão tropeiro</span><i>✦</i><span>Torresmo</span><i>✦</i><span>Mandioca frita</span><i>✦</i><span>Churrasco na brasa</span><i>✦</i><span>Couve refogada</span><i>✦</i><span>Pudim de leite</span><i>✦</i><span>X-Tudo</span><i>✦</i><span>Café com leite</span><i>✦</i>
+    <span>Pão de queijo</span><i>✦</i><span>Feijão tropeiro</span><i>✦</i><span>Torresmo</span><i>✦</i><span>Mandioca frita</span><i>✦</i><span>Churrasco na brasa</span><i>✦</i><span>Espetinho</span><i>✦</i><span>Costelinha</span><i>✦</i><span>Couve refogada</span><i>✦</i><span>Pudim de leite</span><i>✦</i><span>X-Tudo</span><i>✦</i><span>Café com leite</span><i>✦</i>
+    <span>Pão de queijo</span><i>✦</i><span>Feijão tropeiro</span><i>✦</i><span>Torresmo</span><i>✦</i><span>Mandioca frita</span><i>✦</i><span>Churrasco na brasa</span><i>✦</i><span>Espetinho</span><i>✦</i><span>Costelinha</span><i>✦</i><span>Couve refogada</span><i>✦</i><span>Pudim de leite</span><i>✦</i><span>X-Tudo</span><i>✦</i><span>Café com leite</span><i>✦</i>
   </div>
 </div>
 
@@ -340,30 +345,112 @@
   </header>
 
   <div class="mtabs" role="tablist" aria-label="Menu sections" data-reveal>
-    <button role="tab" id="tab-buffet" aria-controls="panel-buffet" aria-selected="true">
+    <button role="tab" id="tab-plates" aria-controls="panel-plates" aria-selected="true">
       <span class="mtab__num">01</span>
+      <span class="mtab__name" data-i18n="tabPlates">House plates</span>
+      <span class="mtab__meta" data-i18n="metaPlates">Off the grill · new</span>
+    </button>
+    <button role="tab" id="tab-buffet" aria-controls="panel-buffet" aria-selected="false" tabindex="-1">
+      <span class="mtab__num">02</span>
       <span class="mtab__name" data-i18n="tabBuffet">Buffet</span>
       <span class="mtab__meta" data-i18n="metaBuffet">Eat in or to go</span>
     </button>
     <button role="tab" id="tab-burgers" aria-controls="panel-burgers" aria-selected="false" tabindex="-1">
-      <span class="mtab__num">02</span>
+      <span class="mtab__num">03</span>
       <span class="mtab__name" data-i18n="tabBurgers">Brazilian Burgers</span>
       <span class="mtab__meta" data-i18n="metaBurgers">Thu – Sun · 5 – 10 PM</span>
     </button>
     <button role="tab" id="tab-breakfast" aria-controls="panel-breakfast" aria-selected="false" tabindex="-1">
-      <span class="mtab__num">03</span>
+      <span class="mtab__num">04</span>
       <span class="mtab__name" data-i18n="tabBreakfast">Breakfast</span>
       <span class="mtab__meta" data-i18n="metaBreakfast">From 6:30 AM</span>
     </button>
     <button role="tab" id="tab-sweets" aria-controls="panel-sweets" aria-selected="false" tabindex="-1">
-      <span class="mtab__num">04</span>
+      <span class="mtab__num">05</span>
       <span class="mtab__name" data-i18n="tabSweets">Desserts</span>
       <span class="mtab__meta" data-i18n="metaSweets">Ask for today’s selection</span>
     </button>
   </div>
 
+  <!-- House plates -->
+  <div class="panel" role="tabpanel" id="panel-plates" aria-labelledby="tab-plates">
+    <div class="mpanel">
+      <figure class="mpanel__media mpanel__media--video">
+        <div class="mvideo">
+          <video data-autoplay muted loop playsinline preload="none" poster="assets/video/espetinho-poster.webp"
+            aria-label="Beans poured over a plate with a grilled beef skewer, rice, pasta and salad" data-i18n-attr="aria-label:altEspVideo">
+            <source data-src="assets/video/espetinho.webm" type="video/webm">
+            <source data-src="assets/video/espetinho.mp4" type="video/mp4">
+          </video>
+          <span class="mvideo__badge" data-i18n="tagNew">New</span>
+        </div>
+        <figcaption class="mvideo__cap"><span>Prato com espetinho</span> <span data-i18n="espCap">— served the Brazilian way</span></figcaption>
+      </figure>
+      <div class="mpanel__body">
+        <header class="mpanel__head">
+          <h3 class="panel__title" data-i18n="platesTitle">House plates</h3>
+          <p class="mpanel__when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 1.5"/></svg><span data-i18n="metaBuffet">Eat in or to go</span></p>
+        </header>
+        <p class="panel__intro" data-i18n="platesIntro">Full Brazilian plates: meat straight off the grill and every side on the same plate, just like back home.</p>
+        <ul class="dlist" data-zoom-group>
+          <li class="dcard">
+            <button type="button" class="dcard__media" data-type="image" data-full="assets/img/espetinho-prato-924.webp" aria-label="View photos: Prato com espetinho">
+              <picture>
+            <source type="image/avif" srcset="assets/img/espetinho-prato-480.avif 480w, assets/img/espetinho-prato-924.avif 924w" sizes="(min-width: 900px) 170px, 120px">
+            <source type="image/webp" srcset="assets/img/espetinho-prato-480.webp 480w, assets/img/espetinho-prato-924.webp 924w" sizes="(min-width: 900px) 170px, 120px">
+            <img src="assets/img/espetinho-prato-480.jpg" width="480" height="600" loading="lazy" decoding="async"
+              alt="Plate with a grilled beef skewer, beans, rice, pasta, lettuce, tomato, fried cassava and torresmo" data-i18n-attr="alt:altEspPrato">
+          </picture>
+              <span class="dcard__more" aria-hidden="true">+3</span>
+            </button>
+            <span hidden data-type="image" data-full="assets/img/espetinho-viagem-924.webp" data-alt="Prato com espetinho packed to go: skewer, rice, beans, pasta, fried cassava and torresmo" data-i18n-attr="data-alt:altEspViagem"></span>
+            <span hidden data-type="image" data-full="assets/img/espetinho-balcao-1280.webp" data-alt="Prato com espetinho fresh from the kitchen" data-i18n-attr="data-alt:altEspBalcao"></span>
+            <span hidden data-type="video" data-full="assets/video/espetinho" data-poster="assets/video/espetinho-poster.webp" aria-label="Video: Prato com espetinho"></span>
+            <div class="dcard__body">
+              <p class="dcard__tags"><span class="tag tag--new" data-i18n="tagNew">New</span><span class="tag" data-i18n="tagGrill">Off the grill</span></p>
+              <h4 class="dcard__name">Prato com <em>espetinho</em></h4>
+              <p class="dcard__desc" data-i18n="pEsp">A beef skewer off the grill with rice, beans, pasta, lettuce &amp; tomato, fried cassava and crackling torresmo.</p>
+              <p class="dcard__meta" data-i18n="pEspMeta">Eat in or packed to go</p>
+            </div>
+          </li>
+          <li class="dcard">
+            <button type="button" class="dcard__media" data-type="image" data-full="assets/img/chapa-739.webp" aria-label="View photo: Na chapa">
+              <picture>
+            <source type="image/avif" srcset="assets/img/chapa-480.avif 480w, assets/img/chapa-739.avif 739w" sizes="(min-width: 900px) 170px, 120px">
+            <source type="image/webp" srcset="assets/img/chapa-480.webp 480w, assets/img/chapa-739.webp 739w" sizes="(min-width: 900px) 170px, 120px">
+            <img src="assets/img/chapa-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
+              alt="Sizzling cast-iron plate of sliced steak, onions and fries under melted cheese" data-i18n-attr="alt:altChapa">
+          </picture>
+            </button>
+            <div class="dcard__body">
+              <p class="dcard__tags"><span class="tag" data-i18n="tagSizzling">Sizzling</span></p>
+              <h4 class="dcard__name">Na <em>chapa</em></h4>
+              <p class="dcard__desc" data-i18n="dish4">Sliced steak and onions brought to the table still sizzling on cast iron, piled with fries and melted cheese.</p>
+            </div>
+          </li>
+          <li class="dcard">
+            <button type="button" class="dcard__media" data-type="image" data-full="assets/img/marmita-1600.webp" aria-label="View photo: Marmita de churrasco">
+              <picture>
+            <source type="image/avif" srcset="assets/img/marmita-640.avif 640w, assets/img/marmita-1080.avif 1080w" sizes="(min-width: 900px) 170px, 120px">
+            <source type="image/webp" srcset="assets/img/marmita-640.webp 640w, assets/img/marmita-1080.webp 1080w" sizes="(min-width: 900px) 170px, 120px">
+            <img src="assets/img/marmita-640.jpg" width="640" height="296" loading="lazy" decoding="async"
+              alt="Takeout box packed with sliced churrasco, sausage, chicken, fried cassava, rice, pasta and collard greens" data-i18n-attr="alt:altMarmita">
+          </picture>
+            </button>
+            <div class="dcard__body">
+              <p class="dcard__tags"><span class="tag" data-i18n="tagToGo">To go</span></p>
+              <h4 class="dcard__name">Marmita de <em>churrasco</em></h4>
+              <p class="dcard__desc" data-i18n="pMarmita">Sliced churrasco, sausage and roast chicken with fried cassava, rice, pasta and collard greens, packed hot.</p>
+            </div>
+          </li>
+        </ul>
+        <p class="note" data-i18n="platesNote">Call ahead and we’ll have your plate hot and ready for pickup.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Buffet -->
-  <div class="panel" role="tabpanel" id="panel-buffet" aria-labelledby="tab-buffet">
+  <div class="panel" role="tabpanel" id="panel-buffet" aria-labelledby="tab-buffet" hidden>
     <div class="mpanel">
       <figure class="mpanel__media">
         <picture>
@@ -379,6 +466,44 @@
           <p class="mpanel__when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 1.5"/></svg><span data-i18n="metaBuffet">Eat in or to go</span></p>
         </header>
         <p class="panel__intro" data-i18n="buffetIntro">Hot trays of home cooking from Minas and Goiás, plus churrasco from the grill. Eat in or take a full plate to go.</p>
+        <div class="mshots" data-zoom-group>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/costelinha-960.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/costelinha-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/costelinha-480.webp" sizes="170px">
+            <img src="assets/img/costelinha-480.jpg" width="480" height="600" loading="lazy" decoding="async"
+              alt="Tray of oven-roasted pork ribs with parsley" data-i18n-attr="alt:altCostelinha">
+          </picture>
+              <span class="mshot__new" data-i18n="tagNew">New</span>
+            </button>
+            <figcaption><span data-i18n="bName13">Costelinha assada</span></figcaption>
+          </figure>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/carne-batata-960.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/carne-batata-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/carne-batata-480.webp" sizes="170px">
+            <img src="assets/img/carne-batata-480.jpg" width="480" height="600" loading="lazy" decoding="async"
+              alt="Tray of slow-cooked beef stew with potatoes" data-i18n-attr="alt:altCarneBatata">
+          </picture>
+              
+            </button>
+            <figcaption><span data-i18n="bName8">Carne com batata</span></figcaption>
+          </figure>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/mandioca-torresmo-739.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/mandioca-torresmo-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/mandioca-torresmo-480.webp" sizes="170px">
+            <img src="assets/img/mandioca-torresmo-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
+              alt="Wooden bowl of fried cassava and torresmo with sautéed collard greens" data-i18n-attr="alt:altMandioca">
+          </picture>
+              
+            </button>
+            <figcaption>Torresmo &amp; mandioca</figcaption>
+          </figure>
+        </div>
         <ul class="mlist mlist--2">
           <li><div class="mlist__row"><span class="mlist__name">Churrasco na brasa</span></div><p class="mlist__desc" data-i18n="bDesc1">Grilled meats off the skewer</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Feijão tropeiro</span></div><p class="mlist__desc" data-i18n="bDesc2">Beans, cassava flour, pork belly &amp; greens</p></li>
@@ -387,6 +512,7 @@
           <li><div class="mlist__row"><span class="mlist__name">Couve refogada</span></div><p class="mlist__desc" data-i18n="bDesc5">Collard greens sautéed in garlic</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Farofa</span></div><p class="mlist__desc" data-i18n="bDesc6">Toasted cassava flour with egg</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Bife à milanesa</span></div><p class="mlist__desc" data-i18n="bDesc7">Breaded steak cutlets</p></li>
+          <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName13">Costelinha assada</span><span class="tag tag--new" data-i18n="tagNew">New</span></div><p class="mlist__desc" data-i18n="bDesc13">Oven-roasted pork ribs, seasoned and finished with parsley</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName8">Carne com batata</span></div><p class="mlist__desc" data-i18n="bDesc8">Slow-cooked beef with potatoes</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName9">Frango assado</span></div><p class="mlist__desc" data-i18n="bDesc9">Roasted chicken</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName10">Banana frita</span></div><p class="mlist__desc" data-i18n="bDesc10">Fried sweet plantains</p></li>
@@ -463,6 +589,31 @@
           <p class="mpanel__when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 1.5"/></svg><span data-i18n="metaBreakfast">From 6:30 AM</span></p>
         </header>
         <p class="panel__intro" data-i18n="bfIntro">A Brazilian breakfast, served from 6:30 AM.</p>
+        <div class="mshots" data-zoom-group>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/pao-de-sal-960.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/pao-de-sal-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/pao-de-sal-480.webp" sizes="170px">
+            <img src="assets/img/pao-de-sal-480.jpg" width="480" height="600" loading="lazy" decoding="async"
+              alt="Tray of golden Brazilian bread rolls fresh from the oven" data-i18n-attr="alt:altPaoSal">
+          </picture>
+              
+            </button>
+            <figcaption>Pão de sal</figcaption>
+          </figure>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/pao-de-queijo-739.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/pao-de-queijo-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/pao-de-queijo-480.webp" sizes="170px">
+            <img src="assets/img/pao-de-queijo-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
+              alt="Basket of pão de queijo" data-i18n-attr="alt:altPaoShort">
+          </picture>
+            </button>
+            <figcaption>Pão de queijo</figcaption>
+          </figure>
+        </div>
         <ul class="mlist mlist--2">
           <li><div class="mlist__row"><span class="mlist__name">Pão de queijo</span></div><p class="mlist__desc" data-i18n="bf1">Cheese bread, straight from the oven</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Café com leite</span></div><p class="mlist__desc" data-i18n="bf2">Brazilian coffee with milk</p></li>
@@ -495,20 +646,45 @@
           <li><div class="mlist__row"><span class="mlist__name">Pudim de leite</span></div><p class="mlist__desc" data-i18n="sw1">Silky milk flan in dark caramel</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Pavê</span></div><p class="mlist__desc" data-i18n="sw2">Layers of cream and biscuit, chocolate &amp; strawberries</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="sw3n">Chocolate &amp; cream</span></div><p class="mlist__desc" data-i18n="sw3">Chocolate over silky cream, finished with shavings</p></li>
+          <li><div class="mlist__row"><span class="mlist__name" data-i18n="sw4n">Dessert cups</span></div><p class="mlist__desc" data-i18n="sw4">Individual cups to go: ask for today’s flavors</p></li>
         </ul>
-        <div class="mthumbs">
-          <figure><picture>
-          <source type="image/avif" srcset="assets/img/pave-morango-480.avif 480w, assets/img/pave-morango-739.avif 739w" sizes="160px">
-          <source type="image/webp" srcset="assets/img/pave-morango-480.webp 480w, assets/img/pave-morango-739.webp 739w" sizes="160px">
-          <img src="assets/img/pave-morango-739.jpg" width="739" height="1600" loading="lazy" decoding="async"
-            alt="Layered pavê with chocolate shavings and strawberries" data-i18n-attr="alt:altPave">
-        </picture></figure>
-          <figure><picture>
-          <source type="image/avif" srcset="assets/img/pave-chocolate-480.avif 480w, assets/img/pave-chocolate-739.avif 739w" sizes="160px">
-          <source type="image/webp" srcset="assets/img/pave-chocolate-480.webp 480w, assets/img/pave-chocolate-739.webp 739w" sizes="160px">
-          <img src="assets/img/pave-chocolate-739.jpg" width="739" height="1600" loading="lazy" decoding="async"
-            alt="Dish of cream dessert covered in chocolate and chocolate shavings" data-i18n-attr="alt:altChoc">
-        </picture></figure>
+        <div class="mshots" data-zoom-group>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/pave-morango-739.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/pave-morango-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/pave-morango-480.webp" sizes="170px">
+            <img src="assets/img/pave-morango-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
+              alt="Layered pavê with chocolate shavings and strawberries" data-i18n-attr="alt:altPave">
+          </picture>
+              
+            </button>
+            <figcaption>Pavê</figcaption>
+          </figure>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/pave-chocolate-739.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/pave-chocolate-480.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/pave-chocolate-480.webp" sizes="170px">
+            <img src="assets/img/pave-chocolate-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
+              alt="Dish of cream dessert covered in chocolate and chocolate shavings" data-i18n-attr="alt:altChoc">
+          </picture>
+              
+            </button>
+            <figcaption><span data-i18n="sw3n">Chocolate &amp; cream</span></figcaption>
+          </figure>
+          <figure class="mshot">
+            <button type="button" data-type="image" data-full="assets/img/copinhos-360.webp">
+              <picture>
+            <source type="image/avif" srcset="assets/img/copinhos-360.avif" sizes="170px">
+            <source type="image/webp" srcset="assets/img/copinhos-360.webp" sizes="170px">
+            <img src="assets/img/copinhos-360.jpg" width="360" height="450" loading="lazy" decoding="async"
+              alt="Individual dessert cups with layered cream and chocolate" data-i18n-attr="alt:altCopinhos">
+          </picture>
+              
+            </button>
+            <figcaption><span data-i18n="sw4n">Dessert cups</span></figcaption>
+          </figure>
         </div>
         <p class="note" data-i18n="sweetsNote">Ask our team which desserts are in the case today.</p>
       </div>
@@ -602,6 +778,19 @@
       <img src="assets/img/buffet-overhead-640.webp" width="640" height="296" loading="lazy" decoding="async" alt="The Goianeiro buffet seen from above">
       <span class="tile__cap">Buffet</span>
     </button>
+    <button class="tile tile--video tile--feature" data-type="video" data-cat="dishes video" data-full="assets/video/espetinho" data-poster="assets/video/espetinho-poster.webp" aria-label="Play video: Prato com espetinho">
+      <img src="assets/video/espetinho-poster.webp" width="478" height="850" loading="lazy" decoding="async" alt="">
+      <span class="tile__play" aria-hidden="true"></span><span class="tile__dur">0:11</span>
+      <span class="tile__cap">Prato com espetinho</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="dishes" data-full="assets/img/espetinho-prato-924.webp" aria-label="Prato com espetinho">
+      <img src="assets/img/espetinho-prato-480.webp" width="480" height="600" loading="lazy" decoding="async" alt="Plate with a grilled beef skewer, beans, rice, pasta and salad">
+      <span class="tile__cap">Espetinho</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/costelinha-960.webp" aria-label="Costelinha assada">
+      <img src="assets/img/costelinha-480.webp" width="480" height="600" loading="lazy" decoding="async" alt="Oven-roasted pork ribs">
+      <span class="tile__cap">Costelinha assada</span>
+    </button>
     <button class="tile" data-type="image" data-cat="desserts" data-full="assets/img/pudim-739.webp" aria-label="Pudim de leite">
       <img src="assets/img/pudim-480.webp" width="480" height="1039" loading="lazy" decoding="async" alt="Pudim de leite with caramel">
       <span class="tile__cap">Pudim de leite</span>
@@ -640,6 +829,14 @@
     <button class="tile" data-type="image" data-cat="dishes" data-full="assets/img/mandioca-torresmo-739.webp" aria-label="Mandioca, torresmo &amp; couve">
       <img src="assets/img/mandioca-torresmo-480.webp" width="480" height="1039" loading="lazy" decoding="async" alt="Mandioca, torresmo and couve">
       <span class="tile__cap">Mandioca, torresmo &amp; couve</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/carne-batata-960.webp" aria-label="Carne com batata">
+      <img src="assets/img/carne-batata-480.webp" width="480" height="600" loading="lazy" decoding="async" alt="Beef stew with potatoes">
+      <span class="tile__cap">Carne com batata</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="dishes" data-full="assets/img/pao-de-sal-960.webp" aria-label="Pão de sal">
+      <img src="assets/img/pao-de-sal-480.webp" width="480" height="600" loading="lazy" decoding="async" alt="Golden Brazilian bread rolls">
+      <span class="tile__cap">Pão de sal</span>
     </button>
     <button class="tile" data-type="image" data-cat="desserts" data-full="assets/img/pave-chocolate-739.webp" aria-label="Pavê de chocolate">
       <img src="assets/img/pave-chocolate-480.webp" width="480" height="1039" loading="lazy" decoding="async" alt="Chocolate and cream dessert">

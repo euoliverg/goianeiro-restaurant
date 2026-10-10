@@ -56,6 +56,25 @@
     dish4: 'Carne fatiada com cebola chegando à mesa ainda chiando na chapa de ferro, com batata frita e queijo derretido.',
     duoText: 'E porque refeição brasileira que se preze termina assim: pão de queijo quentinho e uma fatia de pudim.',
     menuKicker: 'O cardápio', menuTitle1: 'O Brasil,', menuTitle2: 'prato a prato.',
+    tabPlates: 'Pratos da casa', metaPlates: 'Na brasa · novidade',
+    platesTitle: 'Pratos da casa',
+    platesIntro: 'Pratos brasileiros completos: carne saindo da brasa e todos os acompanhamentos no mesmo prato, do jeito que a gente come em casa.',
+    platesNote: 'Ligue antes e deixamos seu prato quentinho, pronto para retirar.',
+    espCap: '— servido do jeito brasileiro',
+    pEsp: 'Espetinho de carne na brasa com arroz, feijão, macarrão, alface e tomate, mandioca frita e torresmo pururuca.',
+    pEspMeta: 'Para comer aqui ou levar',
+    pMarmita: 'Churrasco fatiado, linguiça e frango assado com mandioca frita, arroz, macarrão e couve, embalado bem quentinho.',
+    tagNew: 'Novo', tagGrill: 'Na brasa', tagSizzling: 'Na chapa quente', tagToGo: 'Para viagem',
+    bName13: 'Costelinha assada', bDesc13: 'Costelinha de porco assada, bem temperada e finalizada com salsinha',
+    sw4n: 'Copinhos de sobremesa', sw4: 'Sobremesas individuais para levar: pergunte os sabores do dia',
+    altEspVideo: 'Feijão sendo servido sobre um prato com espetinho de carne, arroz, macarrão e salada',
+    altEspPrato: 'Prato com espetinho de carne, feijão, arroz, macarrão, alface, tomate, mandioca frita e torresmo',
+    altEspViagem: 'Prato com espetinho para viagem: espetinho, arroz, feijão, macarrão, mandioca frita e torresmo',
+    altEspBalcao: 'Prato com espetinho saindo da cozinha',
+    altCostelinha: 'Assadeira de costelinha de porco assada com salsinha',
+    altCarneBatata: 'Assadeira de carne cozida com batata',
+    altPaoSal: 'Assadeira de pão de sal dourado saindo do forno',
+    altCopinhos: 'Copinhos de sobremesa com camadas de creme e chocolate',
     tabBuffet: 'Buffet', tabBurgers: 'Hambúrgueres', tabBreakfast: 'Café da manhã', tabSweets: 'Sobremesas',
     buffetNote: 'Os pratos variam — todos estes já passaram pelo nosso buffet. Pergunte à equipe o que tem hoje.',
     buffetTitle: 'Buffet brasileiro',
@@ -419,7 +438,7 @@
     } else {
       const img = new Image();
       img.src = tile.dataset.full;
-      img.alt = $('img', tile).alt;
+      img.alt = tile.dataset.alt || $('img', tile)?.alt || '';
       stage.appendChild(img);
     }
     $('[data-lb-count]', lb).textContent = `${current + 1} / ${list.length}`;
@@ -429,6 +448,15 @@
     show(list.indexOf(tile));
     lb.showModal();
   }));
+
+  // menu photos: each category's photos browse together in the same viewer
+  $$('[data-zoom-group]').forEach(group => {
+    const shots = $$('[data-full]', group);
+    shots.forEach(shot => {
+      if (shot.hidden) return;
+      shot.addEventListener('click', () => { list = shots; show(shots.indexOf(shot)); lb.showModal(); });
+    });
+  });
 
   // gallery filters
   const filterBtns = $$('[data-filter]');

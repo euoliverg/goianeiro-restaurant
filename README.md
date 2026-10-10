@@ -38,14 +38,16 @@ Ready-to-use files in `brand/export/`:
 - **Story quote:** caption of the 15 Sep 2026 reel. "Melhor x-tudo de Seattle": caption of 16 Sep 2026.
 - **Address & phones:** caption of the 19 Sep 2026 post.
 - **Buffet dishes:** only dishes visible in the restaurant's reels/photos; no buffet prices are shown because none were published.
+- **House plates (Oct 2026 update):** photos and video sent by the owner: Prato com espetinho (plate, to-go box, beans-pour video), costelinha assada, carne com batata, pão de sal (from an Instagram story) and dessert cups. No prices were supplied, so none are shown.
 
 ## ⚠️ Please confirm before launch
 1. **Street number.** The Instagram **bio says 14334** 124th Ave NE; the **19 Sep post and the flyer say 14338**. The site uses **14338** (2 of 3 sources). Change it in `assets/js/main.js` → `CONFIG.address` and in the JSON-LD in `index.html`.
 2. **Phones.** Both public numbers are shown: (843) 508-3226 (Jhon) and (425) 691-8936 (Pamela). Primary = Jhon's.
 3. **Breakfast vs. hours.** The bio says doors open at 11 AM, but breakfast was announced for 6:30 AM. Update the bio or the site so they match (`CONFIG.hours` drives the "Open now" badge).
-4. **Burger menu items 05, 06, 10, 11, 17–20** were cut off in the Instagram image. Send the full board and they'll be added.
-5. **Online ordering / reservations.** No ordering platform or reservation system was found, so ORDER NOW and RESERVE A TABLE open a "call us" sheet. Paste a DoorDash/Toast/Square link into `CONFIG.orderUrl` and ORDER NOW will go there instead.
-6. **Domain.** Canonical, Open Graph, JSON-LD and sitemap point to `goianeirorestaurante.com`.
+4. **House plates prices.** Prato com espetinho, Na chapa and Marmita de churrasco have no prices yet. Send them and they'll be added (and to the JSON-LD).
+5. **Burger menu items 05, 06, 10, 11, 17–20** were cut off in the Instagram image. Send the full board and they'll be added.
+6. **Online ordering / reservations.** No ordering platform or reservation system was found, so ORDER NOW and RESERVE A TABLE open a "call us" sheet. Paste a DoorDash/Toast/Square link into `CONFIG.orderUrl` and ORDER NOW will go there instead.
+7. **Domain.** Canonical, Open Graph, JSON-LD and sitemap point to `goianeirorestaurante.com`.
 
 ## Hero 3D
 - Brand film generated in Google Flow (original kept in `_source/hero-flow-original.mp4`), cut into a seamless 7s loop (1s cross-fade end→start).
