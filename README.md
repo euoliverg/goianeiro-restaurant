@@ -1,8 +1,8 @@
 # Goianeiro Restaurant — website
 
-**Live (Vercel):** https://goianeiro-restaurant.vercel.app/
+**Live:** https://goianeirorestaurante.com/ (Vercel)
 
-**Deploy on Vercel:** import the repo (or drag the folder) with Framework Preset = **Other**, no build command, output directory = root. `vercel.json` sets security headers, cache rules and clean URLs. If the project gets a different URL or a custom domain, replace `https://goianeiro-restaurant.vercel.app/` in `index.html`, `robots.txt` and `sitemap.xml`.
+**Deploy on Vercel:** import the repo (or drag the folder) with Framework Preset = **Other**, no build command, output directory = root. `vercel.json` sets security headers, cache rules and clean URLs. If the domain ever changes, replace `https://goianeirorestaurante.com/` in `index.html`, `robots.txt` and `sitemap.xml`.
 
 Static, dependency-free site (HTML + CSS + JS). No build step: upload the folder to any static host (Netlify, Vercel, Cloudflare Pages, GitHub Pages, cPanel).
 If you move to your own domain, update the canonical / `og:url` / `og:image` / JSON-LD URLs in `index.html`, plus `robots.txt` and `sitemap.xml`.
@@ -45,7 +45,7 @@ Ready-to-use files in `brand/export/`:
 3. **Breakfast vs. hours.** The bio says doors open at 11 AM, but breakfast was announced for 6:30 AM. Update the bio or the site so they match (`CONFIG.hours` drives the "Open now" badge).
 4. **Burger menu items 05, 06, 10, 11, 17–20** were cut off in the Instagram image. Send the full board and they'll be added.
 5. **Online ordering / reservations.** No ordering platform or reservation system was found, so ORDER NOW and RESERVE A TABLE open a "call us" sheet. Paste a DoorDash/Toast/Square link into `CONFIG.orderUrl` and ORDER NOW will go there instead.
-6. **Domain.** Canonical, Open Graph, JSON-LD and sitemap point to `goianeiro-restaurant.vercel.app`. Update them if the final URL differs.
+6. **Domain.** Canonical, Open Graph, JSON-LD and sitemap point to `goianeirorestaurante.com`.
 
 ## Hero 3D
 - Brand film generated in Google Flow (original kept in `_source/hero-flow-original.mp4`), cut into a seamless 7s loop (1s cross-fade end→start).

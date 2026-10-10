@@ -3,4 +3,4 @@ Allow: /
 Allow: /brand/export/
 Disallow: /brand/
 
-Sitemap: https://goianeiro-restaurant.vercel.app/sitemap.xml
+Sitemap: https://goianeirorestaurante.com/sitemap.xml
