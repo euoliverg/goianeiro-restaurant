@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /brand/export/
 Disallow: /brand/
 
-Sitemap: https://euoliverg.github.io/goianeiro-restaurant/sitemap.xml
+Sitemap: https://goianeiro-restaurant.vercel.app/sitemap.xml
