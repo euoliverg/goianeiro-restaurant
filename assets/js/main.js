@@ -14,6 +14,10 @@
     timezone: 'America/Los_Angeles',
     // 0 = Sunday … 6 = Saturday; [open, close] in minutes after midnight
     hours: { 0: [660, 1320], 1: [660, 1140], 2: [660, 1140], 3: [660, 1140], 4: [660, 1320], 5: [660, 1320], 6: [660, 1320] },
+    // Customer reviews (Supabase). Paste the Project URL and the anon / publishable key
+    // from Supabase → Project Settings → API. Both are safe to publish: the database
+    // only lets the public read visible reviews and add new ones (see supabase/reviews.sql).
+    reviews: { supabaseUrl: '', supabaseKey: '' },
   };
   const fullAddress = `${CONFIG.address.line1}, ${CONFIG.address.line2}`;
   const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent('Goianeiro Restaurant, ' + fullAddress);
@@ -99,7 +103,7 @@
     s15: 'Batata frita (P)', s16: 'Batata frita (G)', s21: 'Maionese temperada',
     bfTitle: 'Café da manhã', bfIntro: 'Café da manhã brasileiro, a partir das 6h30.',
     bf1: 'Quentinho, saindo do forno', bf2: 'Café coado com leite', bf3: 'Crocantes, recheadas de frango',
-    bf4: 'Pãozinho francês quentinho', bf5n: 'Bolos variados', bf5: 'Bolos caseiros do dia', bf6n: 'Salgados', bf6: 'Sequinhos e crocantes',
+    bf4: 'Pãozinho francês quentinho', bf5n: 'Bolos variados', bf5: 'Variedade de bolos', bf6n: 'Salgados', bf6: 'Sequinhos e crocantes',
     sw1: 'Pudim de leite com calda de caramelo', sw2: 'Camadas de creme e biscoito, chocolate e morango',
     sw3n: 'Pavê de chocolate', sw3: 'Chocolate sobre creme, finalizado com raspas',
     sweetsNote: 'Pergunte à nossa equipe quais sobremesas estão na vitrine hoje.',
@@ -135,12 +139,50 @@
     altMarmita: 'Marmita com churrasco fatiado, linguiça, frango, mandioca frita, arroz, macarrão e couve',
     statusOpen: 'Aberto agora · fecha às {t}', statusOpensToday: 'Fechado · abre hoje às {t}', statusOpensTomorrow: 'Fechado · abre amanhã às {t}',
     today: 'Hoje',
+    navReviews: 'Avaliações', revKicker: 'Avaliações', revTitle1: 'Direto dos', revTitle2: 'nossos clientes.',
+    revWrite: 'Escrever avaliação', revCatFood: 'Qualidade da comida', revCatService: 'Atendimento', revCatAmb: 'Ambiente',
+    revSortLabel: 'Ordenar', revSortNew: 'Mais recentes', revSortHigh: 'Melhores notas', revSortLow: 'Piores notas',
+    revMore: 'Ver mais avaliações',
+    rvStarsLabel: '{v} de 5 estrelas', rvStar1: '1 estrela', rvStarN: '{n} estrelas',
+    rvBasedOne: 'Baseado em 1 avaliação', rvBasedMany: 'Baseado em {n} avaliações', rvNone: 'Ainda não há avaliações',
+    rvDistRow: '{s} estrelas: {n}', rvAte: 'Pediu', rvFood: 'Comida',
+    rvEmptyT: 'Ainda não há avaliações.', rvEmptyD: 'Já veio ao Goianeiro? Seja o primeiro a contar como estava a comida.',
+    rvErr: 'Não foi possível carregar as avaliações agora.', rvRetry: 'Tentar de novo',
+    rvSoon: 'As avaliações abrem em breve.',
+    fClose: 'Fechar', fKicker: 'Sua avaliação', fTitle: 'Avalie sua visita', fOverall: 'Nota geral', fFood: 'Qualidade da comida',
+    fService: 'Atendimento (opcional)', fAmb: 'Ambiente (opcional)', fName: 'Seu nome',
+    fNameHint: 'Aparece publicamente — só o primeiro nome já basta.', rfVisit: 'Como foi a visita? (opcional)',
+    vDine: 'Comi no restaurante', vTake: 'Para viagem', vBreakfast: 'Café da manhã', vBurgers: 'Hambúrgueres',
+    fDish: 'O que você comeu? (opcional)', fComment: 'Conte como estava a comida', fCommentPh: 'O que você pediu? Como estava?',
+    fConsent: 'Esta avaliação é sobre a minha própria visita ao Goianeiro.',
+    fNote: 'As avaliações são publicadas na hora. Links não são permitidos, e conteúdo ofensivo é removido.',
+    fSubmit: 'Publicar avaliação', fSending: 'Publicando…', fOther: 'Outro prato',
+    sTitle: 'Obrigado!', sText: 'Sua avaliação já está publicada no site.', sClose: 'Fechar',
+    eOverall: 'Escolha uma nota geral.', eFood: 'Dê uma nota para a comida.', eName: 'Digite seu nome (2 a 40 caracteres).',
+    eComment: 'Escreva pelo menos 10 caracteres sobre a sua visita.', eLink: 'Links não são permitidos nas avaliações.',
+    eConsent: 'Confirme que a avaliação é sobre a sua própria visita.',
+    eRate: 'Você enviou várias avaliações em pouco tempo. Tente de novo mais tarde.',
+    eCheck: 'Algum campo não foi aceito. Confira e tente de novo.',
+    eNet: 'Não foi possível publicar agora. Verifique a conexão e tente de novo.',
   };
   const EN_EXTRA = {
     sheetKickerR: 'Reservations', sheetTitleR: 'Call to reserve',
     sheetTextR: 'Coming with a group or want to hold a table? Call and check availability with our team.',
     statusOpen: 'Open now · closes at {t}', statusOpensToday: 'Closed · opens today at {t}', statusOpensTomorrow: 'Closed · opens tomorrow at {t}',
     today: 'Today',
+    rvStarsLabel: '{v} out of 5 stars', rvStar1: '1 star', rvStarN: '{n} stars',
+    rvBasedOne: 'Based on 1 review', rvBasedMany: 'Based on {n} reviews', rvNone: 'No reviews yet',
+    rvDistRow: '{s} stars: {n}', rvAte: 'Ate', rvFood: 'Food',
+    rvEmptyT: 'No reviews yet.', rvEmptyD: 'Been to Goianeiro? Be the first to tell others how the food was.',
+    rvErr: 'We couldn’t load the reviews right now.', rvRetry: 'Try again',
+    rvSoon: 'Reviews are opening soon.',
+    eOverall: 'Choose an overall rating.', eFood: 'Rate the food quality.', eName: 'Enter your name (2–40 characters).',
+    eComment: 'Write at least 10 characters about your visit.', eLink: 'Links aren’t allowed in reviews.',
+    eConsent: 'Please confirm this review is about your own visit.',
+    eRate: 'You’ve sent several reviews in a short time. Please try again later.',
+    eCheck: 'Something in the review isn’t accepted. Check the fields and try again.',
+    eNet: 'Couldn’t publish right now. Check your connection and try again.',
+    fSending: 'Publishing…', fOther: 'Something else',
   };
   const META = {
     en: {
@@ -162,6 +204,7 @@
   let lang = 'en';
   const t = key => (lang === 'pt' ? PT[key] : EN[key]) ?? EN[key] ?? key;
 
+  const langHooks = []; // features that render text from JS re-render on language change
   function setLang(next) {
     lang = next === 'pt' ? 'pt' : 'en';
     document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
@@ -174,6 +217,7 @@
     $('meta[name="description"]').content = META[lang].desc;
     try { localStorage.setItem('goianeiro-lang', lang); } catch (e) { /* storage unavailable */ }
     updateStatus();
+    langHooks.forEach(fn => fn());
   }
   $$('[data-lang]').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
@@ -414,6 +458,217 @@
   }));
   sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
   $$('[data-close-sheet]', sheet).forEach(a => a.addEventListener('click', () => sheet.close()));
+
+  /* ---------- customer reviews (Supabase REST) ---------- */
+  const rvRoot = $('[data-reviews]');
+  // Until Supabase is configured the section (and its nav link) stays out of the page entirely,
+  // so customers never see an empty or half-working feature.
+  if (rvRoot && !(CONFIG.reviews.supabaseUrl && CONFIG.reviews.supabaseKey)) {
+    rvRoot.hidden = true;
+    $$('a[href="#reviews"]').forEach(a => (a.hidden = true));
+  }
+  if (rvRoot && !rvRoot.hidden) {
+    const RV = CONFIG.reviews;
+    const enabled = true;
+    const base = RV.supabaseUrl.replace(/\/+$/, '');
+    const api = (path, opts = {}) => fetch(base + path, { ...opts, headers: { apikey: RV.supabaseKey, 'Content-Type': 'application/json', ...(opts.headers || {}) } });
+    const COLS = 'id,created_at,name,rating,food,service,ambience,visit,dish,comment,lang';
+    const ORDER = { new: 'created_at.desc', high: 'rating.desc,created_at.desc', low: 'rating.asc,created_at.desc' };
+    const PAGE = 6;
+    // same rule as the database check (supabase/reviews.sql)
+    const LINK_RE = /(https?:\/\/|www\.|\.(com|net|org|io|co|br|us|info|biz|xyz)\b)/i;
+    const DISHES = ['Churrasco na brasa', 'Feijão tropeiro', 'Feijoada', 'Torresmo & mandioca frita', 'Couve refogada', 'Farofa',
+      'Bife à milanesa', 'Carne com batata', 'X-Tudo', 'X-Bacon', 'X-Salada', 'X-Frango', 'Egg Burger', 'Goianeiro Burger', 'X-Kids',
+      'Pão de queijo', 'Coxinhas', 'Pudim de leite', 'Pavê'];
+    const VISIT_KEY = { 'dine-in': 'vDine', takeout: 'vTake', breakfast: 'vBreakfast', burgers: 'vBurgers' };
+    const STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.9 6 6.6.8-4.9 4.6 1.3 6.5L12 17.3l-5.9 3.2 1.3-6.5-4.9-4.6 6.6-.8z"/></svg>';
+
+    const list = $('[data-rv-list]'), state = $('[data-rv-state]'), more = $('[data-rv-more]'), sortSel = $('[data-rv-sort]');
+    const sheetRv = $('#review-sheet'), form = $('[data-rv-form]'), done = $('[data-rv-done]'), errBox = $('[data-rv-error]'), submitBtn = $('[data-rv-submit]');
+    let sort = 'new', items = [], summary = null, hasMore = false, status = 'loading', lastError = null;
+
+    const locale = () => (lang === 'pt' ? 'pt-BR' : 'en-US');
+    const num1 = v => (v == null ? '–' : Number(v).toLocaleString(locale(), { minimumFractionDigits: 1, maximumFractionDigits: 1 }));
+    const starsLabel = v => t('rvStarsLabel').replace('{v}', num1(v));
+    const fmtDate = iso => new Intl.DateTimeFormat(locale(), { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(iso));
+    const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+    const stars = (v, lg) => { const s = el('span', 'stars' + (lg ? ' stars--lg' : '')); s.style.setProperty('--v', v || 0); s.setAttribute('role', 'img'); s.setAttribute('aria-label', starsLabel(v || 0)); return s; };
+
+    /* summary */
+    function renderSummary() {
+      const s = summary || { count: 0, dist: [0, 0, 0, 0, 0] };
+      $('[data-rv-avg]').textContent = s.count ? num1(s.rating) : '–';
+      const big = $('[data-rv-avg-stars]'); big.style.setProperty('--v', s.count ? s.rating : 0); big.setAttribute('aria-label', starsLabel(s.count ? s.rating : 0));
+      $('[data-rv-count]').textContent = !s.count ? t('rvNone') : s.count === 1 ? t('rvBasedOne') : t('rvBasedMany').replace('{n}', s.count.toLocaleString(locale()));
+      const dist = $('[data-rv-dist]'); dist.replaceChildren();
+      [5, 4, 3, 2, 1].forEach((st, i) => {
+        const n = s.dist[i] || 0, li = el('li');
+        li.setAttribute('aria-label', t('rvDistRow').replace('{s}', st).replace('{n}', n));
+        li.append(el('span', 'rv-dist__s', String(st)), el('span', 'rv-bar'), el('span', 'rv-dist__n', String(n)));
+        const fill = el('i'); fill.style.width = s.count ? `${(n / s.count) * 100}%` : '0%'; li.children[1].append(fill);
+        dist.append(li);
+      });
+      ['food', 'service', 'ambience'].forEach(k => {
+        const v = s[k]; $(`[data-rv-cat="${k}"]`).style.width = v ? `${(v / 5) * 100}%` : '0%';
+        $(`[data-rv-cat-v="${k}"]`).textContent = num1(v);
+      });
+    }
+
+    /* list */
+    function card(r) {
+      const li = el('li', 'rv-card');
+      const head = el('div', 'rv-card__head');
+      const time = el('time', null, fmtDate(r.created_at)); time.dateTime = r.created_at;
+      head.append(stars(r.rating), time);
+      const text = el('p', 'rv-card__text', r.comment);          // textContent: customer text is never parsed as HTML
+      const foot = el('div', 'rv-card__foot');
+      foot.append(el('b', null, r.name));
+      if (r.visit && VISIT_KEY[r.visit]) foot.append(el('span', null, t(VISIT_KEY[r.visit])));
+      if (r.dish) foot.append(el('span', null, `${t('rvAte')}: ${r.dish}`));
+      const food = el('span', 'rv-chip', `${t('rvFood')} ${r.food}/5`);
+      foot.append(food);
+      li.append(head, text, foot);
+      return li;
+    }
+    function renderList() {
+      list.replaceChildren();
+      list.setAttribute('aria-busy', String(enabled && status === 'loading'));
+      state.hidden = true; state.replaceChildren();
+      if (enabled && status === 'loading' && !items.length) {
+        for (let i = 0; i < 3; i++) list.append(el('li', 'rv-card rv-card--skel'));
+      }
+      items.forEach(r => list.append(card(r)));
+      const showState = (title, desc, action) => {
+        state.hidden = false;
+        state.append(el('p', 'rv-state__t', title));
+        if (desc) state.append(el('p', 'rv-state__d', desc));
+        if (action) state.append(action);
+      };
+      if (!enabled) showState(t('rvSoon'));
+      else if (status === 'error' && !items.length) {
+        const retry = el('button', 'btn btn--line btn--sm', t('rvRetry')); retry.type = 'button'; retry.addEventListener('click', () => reload());
+        showState(t('rvErr'), null, retry);
+      } else if (status === 'ready' && !items.length) {
+        const write = el('button', 'btn btn--gold', t('revWrite')); write.type = 'button'; write.addEventListener('click', openForm);
+        showState(t('rvEmptyT'), t('rvEmptyD'), write);
+      }
+      more.hidden = !(hasMore && status !== 'loading');
+      $$('[data-open-review]').forEach(b => (b.hidden = !enabled));
+    }
+
+    async function fetchPage(offset) {
+      const r = await api(`/rest/v1/reviews?select=${COLS}&order=${ORDER[sort]}&limit=${PAGE + 1}&offset=${offset}`);
+      if (!r.ok) throw new Error('list ' + r.status);
+      const rows = await r.json();
+      hasMore = rows.length > PAGE;
+      return rows.slice(0, PAGE);
+    }
+    async function fetchSummary() {
+      const r = await api('/rest/v1/rpc/review_summary', { method: 'POST', body: '{}' });
+      if (!r.ok) throw new Error('summary ' + r.status);
+      summary = await r.json();
+    }
+    async function reload() {
+      if (!enabled) { renderSummary(); renderList(); return; }
+      status = 'loading'; items = []; renderList();
+      try { const [rows] = await Promise.all([fetchPage(0), fetchSummary()]); items = rows; status = 'ready'; }
+      catch (e) { status = 'error'; lastError = e; }
+      renderSummary(); renderList();
+    }
+    more.addEventListener('click', async () => {
+      more.disabled = true;
+      try { items = items.concat(await fetchPage(items.length)); status = 'ready'; } catch (e) { status = 'error'; }
+      more.disabled = false; renderList();
+    });
+    sortSel.addEventListener('change', () => { sort = sortSel.value in ORDER ? sortSel.value : 'new'; reload(); });
+
+    /* form: star pickers + dish list */
+    const OPTIONAL = { service: true, ambience: true };
+    function buildRatePickers() {
+      $$('[data-rate-group]', form).forEach(fs => {
+        const name = fs.dataset.rateGroup;
+        let box = $('.rate', fs);
+        const checked = box ? ($('input:checked', box) || {}).value : '';
+        if (box) box.remove();
+        box = el('div', 'rate');
+        for (let n = 5; n >= 1; n--) {
+          const id = `rv-${name}-${n}`;
+          const inp = el('input'); inp.type = 'radio'; inp.name = name; inp.value = String(n); inp.id = id;
+          if (checked === String(n)) inp.checked = true;
+          if (!OPTIONAL[name]) inp.required = true;
+          const lab = el('label'); lab.htmlFor = id; lab.innerHTML = STAR; lab.title = n === 1 ? t('rvStar1') : t('rvStarN').replace('{n}', n);
+          lab.append(el('span', 'sr', lab.title));
+          box.append(inp, lab);
+          // optional groups: clicking the selected star again clears it
+          if (OPTIONAL[name]) lab.addEventListener('click', e => { if (inp.checked) { e.preventDefault(); inp.checked = false; } });
+        }
+        fs.append(box);
+      });
+      const sel = $('[data-rv-dishes]'), cur = sel.value;
+      sel.replaceChildren(new Option('—', ''), ...DISHES.map(d => new Option(d, d)), new Option(t('fOther'), ''));
+      sel.value = cur;
+    }
+    const counter = $('[data-rv-count-chars]'), area = form.elements.comment;
+    area.addEventListener('input', () => (counter.textContent = `${area.value.length}/800`));
+
+    function openForm() {
+      errBox.hidden = true; done.hidden = true; form.hidden = false;
+      sheetRv.showModal();
+    }
+    $$('[data-open-review]').forEach(b => b.addEventListener('click', openForm));
+    $('[data-rv-close]').addEventListener('click', () => sheetRv.close());
+    sheetRv.addEventListener('click', e => { if (e.target === sheetRv) sheetRv.close(); });
+
+    function fail(key, focusEl) {
+      errBox.textContent = t(key); errBox.hidden = false;
+      if (focusEl) focusEl.focus();
+    }
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      errBox.hidden = true;
+      const f = form.elements, val = n => (form.querySelector(`input[name="${n}"]:checked`) || {}).value;
+      if (f.website.value) { form.reset(); form.hidden = true; done.hidden = false; return; } // spam trap: pretend success
+      const data = {
+        name: f.name.value.trim().replace(/\s+/g, ' '),
+        rating: Number(val('rating')) || 0, food: Number(val('food')) || 0,
+        service: Number(val('service')) || null, ambience: Number(val('ambience')) || null,
+        visit: f.visit.value || null, dish: f.dish.value || null,
+        comment: f.comment.value.trim(), lang,
+      };
+      if (!data.rating) return fail('eOverall', form.querySelector('input[name="rating"]'));
+      if (!data.food) return fail('eFood', form.querySelector('input[name="food"]'));
+      if (data.name.length < 2 || data.name.length > 40) return fail('eName', f.name);
+      if (data.comment.length < 10) return fail('eComment', f.comment);
+      if (LINK_RE.test(data.comment)) return fail('eLink', f.comment);
+      if (!f.consent.checked) return fail('eConsent', f.consent);
+
+      submitBtn.disabled = true; submitBtn.textContent = t('fSending');
+      try {
+        const r = await api('/rest/v1/reviews', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(data) });
+        if (!r.ok) {
+          const j = await r.json().catch(() => ({}));
+          fail(/rate_limited/.test(j.message || '') ? 'eRate' : j.code === '23514' ? 'eCheck' : 'eNet');
+          return;
+        }
+        form.reset(); counter.textContent = '0/800'; buildRatePickers();
+        form.hidden = true; done.hidden = false;
+        sort = 'new'; sortSel.value = 'new';
+        reload();
+      } catch (err) {
+        fail('eNet');
+      } finally {
+        submitBtn.disabled = false; submitBtn.textContent = t('fSubmit');
+      }
+    });
+
+    buildRatePickers();
+    langHooks.push(() => { buildRatePickers(); renderSummary(); renderList(); });
+    // load when the section comes near (saves requests for visitors who never scroll that far)
+    new IntersectionObserver((entries, obs) => {
+      if (entries[0].isIntersecting) { obs.disconnect(); reload(); }
+    }, { rootMargin: '600px 0px' }).observe(rvRoot);
+    renderSummary(); renderList();
+  }
 
   /* ---------- gallery lightbox ---------- */
   const lb = $('#lightbox');

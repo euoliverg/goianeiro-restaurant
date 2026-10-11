@@ -19,6 +19,17 @@ assets/video/           MP4 (H.264) + WebM (VP9), muted, with posters
 _source/                original photos (not used by the page; don't deploy)
 ```
 
+## Avaliações de clientes (Supabase) — como ativar
+The reviews section stays **hidden** until it's configured. One-time setup (~5 min):
+1. Create a free account at https://supabase.com → **New project** (any name, e.g. `goianeiro`; save the database password; region: West US).
+2. In the project: **SQL Editor → New query** → paste the whole content of [`supabase/reviews.sql`](supabase/reviews.sql) → **Run**. (Safe to run again.)
+3. **Project Settings → API**: copy the **Project URL** and the **anon / publishable key** (never the `service_role` / secret key).
+4. Paste them in `assets/js/main.js` → `CONFIG.reviews` → `supabaseUrl` and `supabaseKey`, then commit + push. The section and the "Reviews" menu link appear automatically.
+
+**Moderation** (reviews publish immediately): Supabase → **Table Editor → reviews** → set `hidden` to `true` on a review to remove it from the site (it isn't deleted).
+**Built-in protection** (enforced by the database, not the browser): visitors can only add reviews and read visible ones — never edit/delete; ratings 1–5; name 2–40 chars; comment 10–800 chars with **no links**; max **3 reviews per connection per hour** and 40 per hour site-wide; a hidden spam trap in the form.
+No fake/seeded reviews, and no review star markup for Google (Google ignores ratings a business collects about itself on its own site).
+
 ## Brand identity (`brand/`)
 Open `brand/index.html` to see the full logo system: symbol, main logo (dark and light backgrounds), horizontal logo, seal, icon and palette.
 It modernizes the original sign while keeping its symbols: the bull with horns, the cerrado sun, gold on charcoal, the US 🇺🇸 + Brazil 🇧🇷 flags (US on the left, Brazil on the right, as on the original) and "Minas e Goiás · Sabor de casa".
