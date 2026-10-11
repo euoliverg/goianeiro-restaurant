@@ -885,6 +885,7 @@
             <option value="new" data-i18n="revSortNew">Newest</option>
             <option value="high" data-i18n="revSortHigh">Highest rated</option>
             <option value="low" data-i18n="revSortLow">Lowest rated</option>
+            <option value="photos" data-i18n="revSortPhotos">With photos</option>
           </select>
         </label>
       </div>
@@ -1055,9 +1056,22 @@
       <textarea name="comment" rows="4" maxlength="800" required data-i18n-attr="placeholder:fCommentPh" placeholder="What did you order? How was it?"></textarea>
       <small class="rv-count" data-rv-count-chars>0/800</small>
     </label>
+    <div class="rv-field rv-photo">
+      <span data-i18n="fPhoto">Add a photo (optional)</span>
+      <label class="rv-photo__pick" data-rv-photo-pick>
+        <input type="file" accept="image/*" data-rv-photo-input>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+        <span data-rv-photo-label data-i18n="fPhotoPick">Choose a photo of your food</span>
+      </label>
+      <div class="rv-photo__preview" data-rv-photo-preview hidden>
+        <img alt="" data-rv-photo-img>
+        <button type="button" class="btn btn--line btn--sm" data-rv-photo-remove data-i18n="fPhotoRemove">Remove photo</button>
+      </div>
+      <small data-i18n="fPhotoHint">We resize it and remove location data before it’s sent.</small>
+    </div>
     <!-- spam trap: real people never see or fill this -->
     <label class="rv-hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
-    <label class="rv-check"><input name="consent" type="checkbox" required> <span data-i18n="fConsent">This review is about my own visit to Goianeiro.</span></label>
+    <label class="rv-check"><input name="consent" type="checkbox" required> <span data-i18n="fConsent">This review (and any photo) is from my own visit to Goianeiro.</span></label>
 
     <p class="rv-error" data-rv-error role="alert" hidden></p>
     <button type="submit" class="btn btn--gold btn--block" data-rv-submit data-i18n="fSubmit">Publish review</button>
@@ -1069,6 +1083,12 @@
     <p data-i18n="sText">Your review is live on our site.</p>
     <button type="button" class="btn btn--line" data-rv-close data-i18n="sClose">Close</button>
   </div>
+</dialog>
+
+<!-- Review photo viewer -->
+<dialog class="rv-viewer" id="rv-viewer" aria-label="Review photo">
+  <button class="lightbox__btn lightbox__close" data-rv-viewer-close aria-label="Close">×</button>
+  <figure><img alt="" data-rv-viewer-img><figcaption data-rv-viewer-cap></figcaption></figure>
 </dialog>
 
 <!-- Lightbox -->

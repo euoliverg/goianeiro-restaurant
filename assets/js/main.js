@@ -142,7 +142,7 @@
     navReviews: 'Avaliações', revKicker: 'Avaliações', revTitle1: 'Direto dos', revTitle2: 'nossos clientes.',
     revWrite: 'Escrever avaliação', revCatFood: 'Qualidade da comida', revCatService: 'Atendimento', revCatAmb: 'Ambiente',
     revSortLabel: 'Ordenar', revSortNew: 'Mais recentes', revSortHigh: 'Melhores notas', revSortLow: 'Piores notas',
-    revMore: 'Ver mais avaliações',
+    revMore: 'Ver mais avaliações', revSortPhotos: 'Com fotos',
     rvStarsLabel: '{v} de 5 estrelas', rvStar1: '1 estrela', rvStarN: '{n} estrelas',
     rvBasedOne: 'Baseado em 1 avaliação', rvBasedMany: 'Baseado em {n} avaliações', rvNone: 'Ainda não há avaliações',
     rvDistRow: '{s} estrelas: {n}', rvAte: 'Pediu', rvFood: 'Comida',
@@ -154,7 +154,12 @@
     fNameHint: 'Aparece publicamente — só o primeiro nome já basta.', rfVisit: 'Como foi a visita? (opcional)',
     vDine: 'Comi no restaurante', vTake: 'Para viagem', vBreakfast: 'Café da manhã', vBurgers: 'Hambúrgueres',
     fDish: 'O que você comeu? (opcional)', fComment: 'Conte como estava a comida', fCommentPh: 'O que você pediu? Como estava?',
-    fConsent: 'Esta avaliação é sobre a minha própria visita ao Goianeiro.',
+    fConsent: 'Esta avaliação (e a foto, se tiver) é da minha própria visita ao Goianeiro.',
+    fPhoto: 'Adicionar uma foto (opcional)', fPhotoPick: 'Escolher uma foto da sua comida', fPhotoRemove: 'Remover foto',
+    fPhotoHint: 'A gente reduz a foto e remove a localização antes de enviar.', fPhotoChange: 'Trocar foto', fPhotoWorking: 'Preparando a foto…',
+    ePhotoType: 'Esse arquivo não é uma imagem que dá para usar. Tente uma foto JPG ou PNG.', ePhotoBig: 'Essa foto é grande demais (máx. 15 MB).',
+    ePhotoUp: 'Não foi possível enviar a foto. Tente de novo ou publique sem ela.', ePhotoLimit: 'Você enviou várias fotos em pouco tempo. Tente de novo mais tarde.',
+    rvNoPhotos: 'Ainda não há avaliações com foto.', rvPhotoAlt: 'Foto de {name}', rvPhotoOpen: 'Ver foto de {name}',
     fNote: 'As avaliações são publicadas na hora. Links não são permitidos, e conteúdo ofensivo é removido.',
     fSubmit: 'Publicar avaliação', fSending: 'Publicando…', fOther: 'Outro prato',
     sTitle: 'Obrigado!', sText: 'Sua avaliação já está publicada no site.', sClose: 'Fechar',
@@ -183,6 +188,10 @@
     eCheck: 'Something in the review isn’t accepted. Check the fields and try again.',
     eNet: 'Couldn’t publish right now. Check your connection and try again.',
     fSending: 'Publishing…', fOther: 'Something else',
+    fPhotoChange: 'Change photo', fPhotoWorking: 'Preparing your photo…',
+    ePhotoType: 'That file isn’t an image we can use. Try a JPG or PNG photo.', ePhotoBig: 'That photo is too large (max 15 MB).',
+    ePhotoUp: 'Couldn’t upload the photo. Try again or publish without it.', ePhotoLimit: 'You’ve sent several photos in a short time. Please try again later.',
+    rvNoPhotos: 'No reviews with photos yet.', rvPhotoAlt: 'Photo by {name}', rvPhotoOpen: 'View photo by {name}',
   };
   const META = {
     en: {
@@ -472,8 +481,12 @@
     const enabled = true;
     const base = RV.supabaseUrl.replace(/\/+$/, '');
     const api = (path, opts = {}) => fetch(base + path, { ...opts, headers: { apikey: RV.supabaseKey, 'Content-Type': 'application/json', ...(opts.headers || {}) } });
-    const COLS = 'id,created_at,name,rating,food,service,ambience,visit,dish,comment,lang';
-    const ORDER = { new: 'created_at.desc', high: 'rating.desc,created_at.desc', low: 'rating.asc,created_at.desc' };
+    const COLS = 'id,created_at,name,rating,food,service,ambience,visit,dish,comment,lang,photo';
+    const ORDER = { new: 'created_at.desc', high: 'rating.desc,created_at.desc', low: 'rating.asc,created_at.desc', photos: 'created_at.desc' };
+    const BUCKET = 'review-photos';
+    const photoUrl = name => `${base}/storage/v1/object/public/${BUCKET}/${encodeURIComponent(name)}`;
+    // Legacy anon keys are JWTs (sent as Bearer too); new publishable keys go in `apikey` only.
+    const authHeaders = () => (RV.supabaseKey.startsWith('eyJ') ? { apikey: RV.supabaseKey, Authorization: `Bearer ${RV.supabaseKey}` } : { apikey: RV.supabaseKey });
     const PAGE = 6;
     // same rule as the database check (supabase/reviews.sql)
     const LINK_RE = /(https?:\/\/|www\.|\.(com|net|org|io|co|br|us|info|biz|xyz)\b)/i;
@@ -527,7 +540,18 @@
       if (r.dish) foot.append(el('span', null, `${t('rvAte')}: ${r.dish}`));
       const food = el('span', 'rv-chip', `${t('rvFood')} ${r.food}/5`);
       foot.append(food);
-      li.append(head, text, foot);
+      li.append(head);
+      if (r.photo) {
+        const btn = el('button', 'rv-card__photo'); btn.type = 'button';
+        btn.setAttribute('aria-label', t('rvPhotoOpen').replace('{name}', r.name));
+        const img = el('img'); img.src = photoUrl(r.photo); img.alt = t('rvPhotoAlt').replace('{name}', r.name);
+        img.loading = 'lazy'; img.decoding = 'async';
+        img.addEventListener('error', () => btn.remove());      // photo deleted in Storage → just hide it
+        btn.append(img);
+        btn.addEventListener('click', () => openViewer(photoUrl(r.photo), img.alt, r.name));
+        li.append(btn);
+      }
+      li.append(text, foot);
       return li;
     }
     function renderList() {
@@ -548,6 +572,8 @@
       else if (status === 'error' && !items.length) {
         const retry = el('button', 'btn btn--line btn--sm', t('rvRetry')); retry.type = 'button'; retry.addEventListener('click', () => reload());
         showState(t('rvErr'), null, retry);
+      } else if (status === 'ready' && !items.length && sort === 'photos') {
+        showState(t('rvNoPhotos'));
       } else if (status === 'ready' && !items.length) {
         const write = el('button', 'btn btn--gold', t('revWrite')); write.type = 'button'; write.addEventListener('click', openForm);
         showState(t('rvEmptyT'), t('rvEmptyD'), write);
@@ -557,7 +583,8 @@
     }
 
     async function fetchPage(offset) {
-      const r = await api(`/rest/v1/reviews?select=${COLS}&order=${ORDER[sort]}&limit=${PAGE + 1}&offset=${offset}`);
+      const filter = sort === 'photos' ? '&photo=not.is.null' : '';
+      const r = await api(`/rest/v1/reviews?select=${COLS}${filter}&order=${ORDER[sort]}&limit=${PAGE + 1}&offset=${offset}`);
       if (!r.ok) throw new Error('list ' + r.status);
       const rows = await r.json();
       hasMore = rows.length > PAGE;
@@ -611,6 +638,78 @@
     const counter = $('[data-rv-count-chars]'), area = form.elements.comment;
     area.addEventListener('input', () => (counter.textContent = `${area.value.length}/800`));
 
+    /* photo: resized and re-encoded in the browser (this also strips EXIF/GPS), then uploaded to Storage */
+    const photoInput = $('[data-rv-photo-input]'), photoPrev = $('[data-rv-photo-preview]'),
+      photoImg = $('[data-rv-photo-img]'), photoLabel = $('[data-rv-photo-label]');
+    let photo = null; // { blob, ext, url, uploaded? }
+    const MAX_SIDE = 1600, MAX_BYTES = 2 * 1024 * 1024, MAX_INPUT = 15 * 1024 * 1024;
+    const toBlob = (canvas, type, q) => new Promise(res => canvas.toBlob(res, type, q));
+    async function preparePhoto(file) {
+      let src;
+      try { src = await createImageBitmap(file, { imageOrientation: 'from-image' }); }
+      catch { src = await new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = URL.createObjectURL(file); }); }
+      const w0 = src.width, h0 = src.height;
+      if (!w0 || !h0) throw new Error('not an image');
+      for (const side of [MAX_SIDE, 1200, 900]) {
+        const k = Math.min(1, side / Math.max(w0, h0));
+        const c = document.createElement('canvas'); c.width = Math.round(w0 * k); c.height = Math.round(h0 * k);
+        c.getContext('2d').drawImage(src, 0, 0, c.width, c.height);
+        for (const q of [0.82, 0.7]) {
+          let blob = await toBlob(c, 'image/webp', q);
+          if (!blob || blob.type !== 'image/webp') blob = await toBlob(c, 'image/jpeg', q + 0.05); // Safari without WebP encoding
+          if (blob && blob.size <= MAX_BYTES) return { blob, ext: blob.type === 'image/webp' ? 'webp' : 'jpg' };
+        }
+      }
+      throw new Error('too big');
+    }
+    function clearPhoto() {
+      if (photo) URL.revokeObjectURL(photo.url);
+      photo = null; photoInput.value = ''; photoPrev.hidden = true; photoImg.removeAttribute('src');
+      photoLabel.textContent = t('fPhotoPick');
+    }
+    photoInput.addEventListener('change', async () => {
+      errBox.hidden = true;
+      const file = photoInput.files[0];
+      if (!file) return;
+      if (!/^image\//.test(file.type) && !/\.(jpe?g|png|webp|heic|heif|gif|avif)$/i.test(file.name)) { clearPhoto(); return fail('ePhotoType'); }
+      if (file.size > MAX_INPUT) { clearPhoto(); return fail('ePhotoBig'); }
+      photoLabel.textContent = t('fPhotoWorking'); submitBtn.disabled = true;
+      try {
+        const p = await preparePhoto(file);
+        if (photo) URL.revokeObjectURL(photo.url);
+        photo = { ...p, url: URL.createObjectURL(p.blob) };
+        photoImg.src = photo.url; photoPrev.hidden = false; photoLabel.textContent = t('fPhotoChange');
+      } catch { clearPhoto(); fail('ePhotoType'); }
+      finally { submitBtn.disabled = false; }
+    });
+    $('[data-rv-photo-remove]').addEventListener('click', clearPhoto);
+    const uuid = () => (crypto.randomUUID ? crypto.randomUUID()
+      : '10000000-1000-4000-8000-100000000000'.replace(/[018]/g, c => (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)));
+    async function uploadPhoto() {
+      if (photo.uploaded) return photo.uploaded;   // retry after a failed review: don't upload twice
+      const name = `${uuid()}.${photo.ext}`;
+      const r = await fetch(`${base}/storage/v1/object/${BUCKET}/${name}`, {
+        method: 'POST', body: photo.blob,
+        headers: { ...authHeaders(), 'Content-Type': photo.blob.type, 'x-upsert': 'false', 'cache-control': '31536000' },
+      });
+      if (!r.ok) {
+        const j = await r.json().catch(() => ({}));
+        throw Object.assign(new Error('upload'), { key: /row-level security|policy/i.test(`${j.message || ''} ${j.error || ''}`) ? 'ePhotoLimit' : 'ePhotoUp' });
+      }
+      photo.uploaded = name;
+      return name;
+    }
+
+    /* full-size photo viewer */
+    const viewer = $('#rv-viewer'), viewerImg = $('[data-rv-viewer-img]');
+    function openViewer(src, alt, name) {
+      viewerImg.src = src; viewerImg.alt = alt; $('[data-rv-viewer-cap]').textContent = name;
+      viewer.showModal();
+    }
+    $('[data-rv-viewer-close]').addEventListener('click', () => viewer.close());
+    viewer.addEventListener('click', e => { if (e.target === viewer || e.target.tagName === 'FIGURE') viewer.close(); });
+    viewer.addEventListener('close', () => viewerImg.removeAttribute('src'));
+
     function openForm() {
       errBox.hidden = true; done.hidden = true; form.hidden = false;
       sheetRv.showModal();
@@ -644,12 +743,18 @@
 
       submitBtn.disabled = true; submitBtn.textContent = t('fSending');
       try {
+        if (photo) {
+          try { data.photo = await uploadPhoto(); }
+          catch (er) { fail(er.key || 'ePhotoUp'); return; }
+        }
         const r = await api('/rest/v1/reviews', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(data) });
         if (!r.ok) {
           const j = await r.json().catch(() => ({}));
-          fail(/rate_limited/.test(j.message || '') ? 'eRate' : j.code === '23514' ? 'eCheck' : 'eNet');
+          const m = j.message || '';
+          fail(/rate_limited/.test(m) ? 'eRate' : /photo_missing/.test(m) ? 'ePhotoUp' : j.code === '23514' ? 'eCheck' : 'eNet');
           return;
         }
+        clearPhoto();
         form.reset(); counter.textContent = '0/800'; buildRatePickers();
         form.hidden = true; done.hidden = false;
         sort = 'new'; sortSel.value = 'new';
@@ -662,7 +767,7 @@
     });
 
     buildRatePickers();
-    langHooks.push(() => { buildRatePickers(); renderSummary(); renderList(); });
+    langHooks.push(() => { buildRatePickers(); renderSummary(); renderList(); if (photo) photoLabel.textContent = t('fPhotoChange'); });
     // load when the section comes near (saves requests for visitors who never scroll that far)
     new IntersectionObserver((entries, obs) => {
       if (entries[0].isIntersecting) { obs.disconnect(); reload(); }

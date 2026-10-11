@@ -26,7 +26,8 @@ The reviews section stays **hidden** until it's configured. One-time setup (~5 m
 3. **Project Settings → API**: copy the **Project URL** and the **anon / publishable key** (never the `service_role` / secret key).
 4. Paste them in `assets/js/main.js` → `CONFIG.reviews` → `supabaseUrl` and `supabaseKey`, then commit + push. The section and the "Reviews" menu link appear automatically.
 
-**Moderation** (reviews publish immediately): Supabase → **Table Editor → reviews** → set `hidden` to `true` on a review to remove it from the site (it isn't deleted).
+**Moderation** (reviews **and photos** publish immediately): Supabase → **Table Editor → reviews** → set `hidden` to `true` on a review to remove it (and its photo) from the site — it isn't deleted. To delete the photo file itself: **Storage → review-photos** → delete the file named in the review's `photo` column.
+**Photos** (optional): resized in the customer's browser to max 1600 px and re-encoded to WebP/JPEG, which also **strips GPS/EXIF data**; stored in the public bucket `review-photos` (created by the SQL script) — max 2 MB, JPG/WebP only, random names, the public key can upload but never overwrite, list or delete; max 5 photos per connection per hour, 60 site-wide. Free plan storage: 1 GB ≈ 10,000+ photos at ~70–150 KB each.
 **Built-in protection** (enforced by the database, not the browser): visitors can only add reviews and read visible ones — never edit/delete; ratings 1–5; name 2–40 chars; comment 10–800 chars with **no links**; max **3 reviews per connection per hour** and 40 per hour site-wide; a hidden spam trap in the form.
 No fake/seeded reviews, and no review star markup for Google (Google ignores ratings a business collects about itself on its own site).
 
