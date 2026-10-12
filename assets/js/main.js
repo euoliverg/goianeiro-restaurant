@@ -117,7 +117,6 @@
     r2t: 'Direto da brasa', r2: 'Nossa churrasqueira mantém os espetos girando — a carne chega no prato saindo do fogo.',
     r3t: 'Do café ao hambúrguer', r3: 'Pão de queijo e café de manhã, buffet no almoço e hambúrguer brasileiro de quinta a domingo à noite.',
     r4t: 'Leve para casa', r4: 'Peça um prato completo para viagem — churrasco, mandioca, arroz e todos os acompanhamentos, bem quentinho.',
-    marmitaCap: 'Um prato do Goianeiro para viagem.',
     galKicker: 'Galeria', galTitle1: 'Uma mesa', galTitle2: 'que vale a viagem.', gDoces: 'Sobremesas',
     visitKicker: 'Visite a gente', visitTitle1: 'Chegue com fome.', visitTitle2: 'Saia de barriga cheia.',
     hoursTitle: 'Horário', monWed: 'Segunda a quarta', thuSun: 'Quinta a domingo', hMonWed: '11h – 19h', hThuSun: '11h – 22h',
