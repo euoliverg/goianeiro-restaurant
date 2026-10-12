@@ -20,6 +20,7 @@ _source/                original photos (not used by the page; don't deploy)
 ```
 
 ## Avaliações de clientes (Supabase)
+**Two places:** `reviews.html` (served as `/reviews`) is the full page: summary, filters, every review and the form with photo (`/reviews#write` opens the form directly). The home page only shows a **featured** block: up to 3 of the best real reviews (4-5 stars overall and for food, photos first), the average and links to the full page. With no such reviews yet, the home block stays hidden; the "Reviews" menu link always goes to the full page.
 **Live** in the Supabase project `euoliverg's Project` (ref `zogevfuaffiucgbbreds`, free plan), shared with other apps: every object this site uses is prefixed `goianeiro_` (table `goianeiro_reviews`, function `goianeiro_review_summary`, schema `goianeiro_private`, bucket `goianeiro-review-photos`) and nothing else in the project is touched.
 `assets/js/main.js` → `CONFIG.reviews` holds the Project URL and the **publishable** key (safe in the browser). Never put the secret / `service_role` key in the site. If `CONFIG.reviews` is emptied, the section and the "Reviews" menu link disappear.
 To set it up in another project: **SQL Editor → New query** → paste [`supabase/reviews.sql`](supabase/reviews.sql) → **Run** (safe to re-run), then update `CONFIG.reviews`.

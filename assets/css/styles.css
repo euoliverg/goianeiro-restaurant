@@ -874,3 +874,25 @@ dialog { color: var(--cream); }
 .rv-viewer figure { margin: 0; display: grid; justify-items: center; gap: .8rem; }
 .rv-viewer img { max-width: min(92vw, 1200px); max-height: 82svh; object-fit: contain; border-radius: 4px; animation: lbIn .4s var(--ease); }
 .rv-viewer figcaption { font: italic 400 1.1rem/1 var(--f-display); color: var(--cream); }
+
+/* ---------- reviews: own page + featured block on the home page ---------- */
+.reviews--page { padding-top: calc(var(--header-h) + clamp(2.5rem, 6vw, 5rem)); min-height: 100svh; }
+.reviews--page::before { display: none; }
+.reviews--page .section-head { margin-bottom: clamp(2rem, 5vw, 4rem); }
+.rv-back { color: inherit; text-decoration: none; }
+.rv-back:hover { color: var(--cream); }
+.rv-mini { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: inherit; padding: .4rem 0; }
+.rv-mini__avg { font: 300 clamp(3rem, 5vw, 4.2rem)/.9 var(--f-display); font-variation-settings: "opsz" 144; color: var(--cream); letter-spacing: -.03em; }
+.rv-mini__meta { display: grid; gap: .45rem; }
+.rv-mini__count { font-size: .86rem; color: var(--muted); }
+.rv-mini:hover .rv-mini__count { color: var(--gold-2); }
+.rv-list--featured { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: stretch; }
+@media (max-width: 899px) {
+  /* phones/tablets: swipe through the highlighted reviews */
+  .rv-list--featured { grid-auto-columns: min(84%, 380px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); overscroll-behavior-x: contain; scrollbar-width: none; padding-bottom: 4px; }
+  .rv-list--featured::-webkit-scrollbar { display: none; }
+  .rv-list--featured .rv-card { scroll-snap-align: start; }
+}
+.rv-list--featured .rv-card { border-color: var(--line-2); background: linear-gradient(160deg, rgba(212, 165, 72, .07), transparent 55%), var(--ink-2); }
+.rv-list--featured .rv-card__text { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
+.rv-feat__ctas { max-width: var(--maxw); margin: clamp(2rem, 4vw, 3rem) auto 0; padding: 0 var(--gutter); display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }

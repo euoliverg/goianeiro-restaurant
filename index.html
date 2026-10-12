@@ -150,7 +150,7 @@
     <a href="#kitchen" data-i18n="navKitchen">Kitchen</a>
     <a href="#experience" data-i18n="navExperience">Experience</a>
     <a href="#gallery" data-i18n="navGallery">Gallery</a>
-    <a href="#reviews" data-i18n="navReviews">Reviews</a>
+    <a href="reviews.html" data-nav-reviews data-i18n="navReviews">Reviews</a>
     <a href="#visit" data-i18n="navVisit">Visit</a>
   </nav>
   <div class="header__actions">
@@ -852,47 +852,26 @@
   </div>
 </section>
 
-<!-- ================= REVIEWS ================= -->
-<section class="reviews" id="reviews" aria-labelledby="reviews-title" data-reviews>
+<!-- ================= FEATURED REVIEWS (full list + form: reviews.html) ================= -->
+<!-- stays hidden until there are real reviews to show -->
+<section class="reviews reviews--featured" id="reviews" aria-labelledby="reviews-title" data-reviews="featured" hidden>
   <header class="section-head section-head--split">
     <div>
       <p class="kicker" data-reveal data-i18n="revKicker">Reviews</p>
       <h2 id="reviews-title" class="display display--xl" data-reveal><span data-i18n="revTitle1">Straight from</span> <em data-i18n="revTitle2">our guests.</em></h2>
     </div>
-    <button type="button" class="btn btn--gold" data-open-review data-reveal data-i18n="revWrite">Write a review</button>
+    <a class="rv-mini" href="reviews.html" data-reveal>
+      <span class="rv-mini__avg" data-rv-avg>–</span>
+      <span class="rv-mini__meta">
+        <span class="stars" data-rv-avg-stars style="--v:0" role="img" aria-label=""></span>
+        <span class="rv-mini__count" data-rv-count></span>
+      </span>
+    </a>
   </header>
-
-  <div class="rv">
-    <aside class="rv-sum" aria-live="polite" data-rv-summary>
-      <div class="rv-sum__score">
-        <span class="rv-sum__avg" data-rv-avg>–</span>
-        <span class="stars stars--lg" data-rv-avg-stars style="--v:0" role="img" aria-label=""></span>
-        <span class="rv-sum__count" data-rv-count></span>
-      </div>
-      <ol class="rv-dist" data-rv-dist aria-label="Rating distribution"></ol>
-      <dl class="rv-cats">
-        <div><dt data-i18n="revCatFood">Food quality</dt><dd><span class="rv-bar"><i data-rv-cat="food"></i></span><b data-rv-cat-v="food">–</b></dd></div>
-        <div><dt data-i18n="revCatService">Service</dt><dd><span class="rv-bar"><i data-rv-cat="service"></i></span><b data-rv-cat-v="service">–</b></dd></div>
-        <div><dt data-i18n="revCatAmb">Atmosphere</dt><dd><span class="rv-bar"><i data-rv-cat="ambience"></i></span><b data-rv-cat-v="ambience">–</b></dd></div>
-      </dl>
-      <button type="button" class="btn btn--line btn--block" data-open-review data-i18n="revWrite">Write a review</button>
-    </aside>
-
-    <div class="rv-main">
-      <div class="rv-bar-top">
-        <label class="rv-sort"><span data-i18n="revSortLabel">Sort</span>
-          <select data-rv-sort>
-            <option value="new" data-i18n="revSortNew">Newest</option>
-            <option value="high" data-i18n="revSortHigh">Highest rated</option>
-            <option value="low" data-i18n="revSortLow">Lowest rated</option>
-            <option value="photos" data-i18n="revSortPhotos">With photos</option>
-          </select>
-        </label>
-      </div>
-      <ul class="rv-list" data-rv-list aria-live="polite" aria-busy="true"></ul>
-      <div class="rv-state" data-rv-state hidden></div>
-      <button type="button" class="btn btn--line rv-more" data-rv-more hidden data-i18n="revMore">Show more reviews</button>
-    </div>
+  <ul class="rv-list rv-list--featured" data-rv-list></ul>
+  <div class="rv-feat__ctas">
+    <a class="btn btn--gold" href="reviews.html" data-i18n="rvSeeAll">See all reviews</a>
+    <a class="btn btn--line" href="reviews.html#write" data-i18n="revWrite">Write a review</a>
   </div>
 </section>
 
@@ -1017,71 +996,6 @@
     <a class="btn btn--gold btn--block" data-tel="0" href="#"><span>Jhon</span> · (843) 508-3226</a>
     <a class="btn btn--line btn--block" data-tel="1" href="#"><span>Pamela</span> · (425) 691-8936</a>
     <a class="btn btn--text btn--block" href="#menu" data-close-sheet data-i18n="ctaMenu">View menu</a>
-  </div>
-</dialog>
-
-<!-- Review form -->
-<dialog class="sheet rv-sheet" id="review-sheet" aria-labelledby="rv-form-title">
-  <form method="dialog" class="sheet__close-form"><button class="sheet__close" aria-label="Close" data-i18n-attr="aria-label:fClose">×</button></form>
-  <form class="rv-form" data-rv-form novalidate>
-    <p class="kicker" data-i18n="fKicker">Your review</p>
-    <h2 id="rv-form-title" class="display display--md" data-i18n="fTitle">Rate your visit</h2>
-
-    <fieldset class="rv-field" data-rate-group="rating"><legend><span data-i18n="fOverall">Overall</span> <abbr title="required">*</abbr></legend></fieldset>
-    <fieldset class="rv-field" data-rate-group="food"><legend><span data-i18n="fFood">Food quality</span> <abbr title="required">*</abbr></legend></fieldset>
-    <div class="rv-row">
-      <fieldset class="rv-field" data-rate-group="service"><legend data-i18n="fService">Service (optional)</legend></fieldset>
-      <fieldset class="rv-field" data-rate-group="ambience"><legend data-i18n="fAmb">Atmosphere (optional)</legend></fieldset>
-    </div>
-
-    <label class="rv-field"><span><span data-i18n="fName">Your name</span> <abbr title="required">*</abbr></span>
-      <input name="name" type="text" maxlength="40" autocomplete="given-name" required>
-      <small data-i18n="fNameHint">Shown publicly — your first name is enough.</small>
-    </label>
-    <div class="rv-row">
-      <label class="rv-field"><span data-i18n="rfVisit">How did you visit? (optional)</span>
-        <select name="visit">
-          <option value="">—</option>
-          <option value="dine-in" data-i18n="vDine">Dine-in</option>
-          <option value="takeout" data-i18n="vTake">Takeout</option>
-          <option value="breakfast" data-i18n="vBreakfast">Breakfast</option>
-          <option value="burgers" data-i18n="vBurgers">Brazilian Burgers</option>
-        </select>
-      </label>
-      <label class="rv-field"><span data-i18n="fDish">What did you eat? (optional)</span>
-        <select name="dish" data-rv-dishes><option value="">—</option></select>
-      </label>
-    </div>
-    <label class="rv-field"><span><span data-i18n="fComment">Tell us about the food</span> <abbr title="required">*</abbr></span>
-      <textarea name="comment" rows="4" maxlength="800" required data-i18n-attr="placeholder:fCommentPh" placeholder="What did you order? How was it?"></textarea>
-      <small class="rv-count" data-rv-count-chars>0/800</small>
-    </label>
-    <div class="rv-field rv-photo">
-      <span data-i18n="fPhoto">Add a photo (optional)</span>
-      <label class="rv-photo__pick" data-rv-photo-pick>
-        <input type="file" accept="image/*" data-rv-photo-input>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
-        <span data-rv-photo-label data-i18n="fPhotoPick">Choose a photo of your food</span>
-      </label>
-      <div class="rv-photo__preview" data-rv-photo-preview hidden>
-        <img alt="" data-rv-photo-img>
-        <button type="button" class="btn btn--line btn--sm" data-rv-photo-remove data-i18n="fPhotoRemove">Remove photo</button>
-      </div>
-      <small data-i18n="fPhotoHint">We resize it and remove location data before it’s sent.</small>
-    </div>
-    <!-- spam trap: real people never see or fill this -->
-    <label class="rv-hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
-    <label class="rv-check"><input name="consent" type="checkbox" required> <span data-i18n="fConsent">This review (and any photo) is from my own visit to Goianeiro.</span></label>
-
-    <p class="rv-error" data-rv-error role="alert" hidden></p>
-    <button type="submit" class="btn btn--gold btn--block" data-rv-submit data-i18n="fSubmit">Publish review</button>
-    <p class="note" data-i18n="fNote">Reviews are published right away. Links aren’t allowed, and offensive content is removed.</p>
-  </form>
-  <div class="rv-done" data-rv-done hidden>
-    <span class="rv-done__mark" aria-hidden="true"><svg viewBox="0 0 200 190"><use href="#g-mark"/></svg></span>
-    <h2 class="display display--md" data-i18n="sTitle">Thank you!</h2>
-    <p data-i18n="sText">Your review is live on our site.</p>
-    <button type="button" class="btn btn--line" data-rv-close data-i18n="sClose">Close</button>
   </div>
 </dialog>
 

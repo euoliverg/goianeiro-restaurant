@@ -144,6 +144,7 @@
     revWrite: 'Escrever avaliação', revCatFood: 'Qualidade da comida', revCatService: 'Atendimento', revCatAmb: 'Ambiente',
     revSortLabel: 'Ordenar', revSortNew: 'Mais recentes', revSortHigh: 'Melhores notas', revSortLow: 'Piores notas',
     revMore: 'Ver mais avaliações', revSortPhotos: 'Com fotos',
+    rvSeeAll: 'Ver todas as avaliações', rvBack: '← Voltar ao início',
     rvStarsLabel: '{v} de 5 estrelas', rvStar1: '1 estrela', rvStarN: '{n} estrelas',
     rvBasedOne: 'Baseado em 1 avaliação', rvBasedMany: 'Baseado em {n} avaliações', rvNone: 'Ainda não há avaliações',
     rvDistRow: '{s} estrelas: {n}', rvAte: 'Pediu', rvFood: 'Comida',
@@ -194,12 +195,16 @@
     ePhotoUp: 'Couldn’t upload the photo. Try again or publish without it.', ePhotoLimit: 'You’ve sent several photos in a short time. Please try again later.',
     rvNoPhotos: 'No reviews with photos yet.', rvPhotoAlt: 'Photo by {name}', rvPhotoOpen: 'View photo by {name}',
   };
+  const onReviewsPage = document.body.classList.contains('page-reviews');
   const META = {
     en: {
       title: document.title,
       desc: $('meta[name="description"]').content,
     },
-    pt: {
+    pt: onReviewsPage ? {
+      title: 'Avaliações | Restaurante Goianeiro · Comida brasileira em Kirkland, WA',
+      desc: 'O que os clientes dizem do Goianeiro, restaurante brasileiro de Minas e Goiás em Kirkland, WA: notas para a comida, o atendimento e o ambiente, com fotos. Deixe a sua avaliação.',
+    } : {
       title: 'Restaurante Goianeiro | Comida brasileira em Kirkland, WA · Minas e Goiás',
       desc: 'O Goianeiro é um restaurante brasileiro em Kirkland, WA, perto de Seattle: comida caseira de Minas Gerais e Goiás, buffet, churrasco na brasa, hambúrguer brasileiro, pão de queijo e café da manhã.',
     },
@@ -470,14 +475,18 @@
   $$('[data-close-sheet]', sheet).forEach(a => a.addEventListener('click', () => sheet.close()));
 
   /* ---------- customer reviews (Supabase REST) ---------- */
+  // Two layouts share this code: data-reviews="featured" on the home page (only the best reviews,
+  // shown once there are real ones) and data-reviews="full" on reviews.html (everything + the form).
   const rvRoot = $('[data-reviews]');
+  const rvConfigured = !!(CONFIG.reviews.supabaseUrl && CONFIG.reviews.supabaseKey);
   // Until Supabase is configured the section (and its nav link) stays out of the page entirely,
   // so customers never see an empty or half-working feature.
-  if (rvRoot && !(CONFIG.reviews.supabaseUrl && CONFIG.reviews.supabaseKey)) {
-    rvRoot.hidden = true;
-    $$('a[href="#reviews"]').forEach(a => (a.hidden = true));
+  if (!rvConfigured) {
+    if (rvRoot) rvRoot.hidden = true;
+    $$('[data-nav-reviews]').forEach(a => (a.hidden = true));
   }
-  if (rvRoot && !rvRoot.hidden) {
+  if (rvRoot && rvConfigured) {
+    const featuredMode = rvRoot.dataset.reviews === 'featured';
     const RV = CONFIG.reviews;
     const enabled = true;
     const base = RV.supabaseUrl.replace(/\/+$/, '');
@@ -514,7 +523,9 @@
       $('[data-rv-avg]').textContent = s.count ? num1(s.rating) : '–';
       const big = $('[data-rv-avg-stars]'); big.style.setProperty('--v', s.count ? s.rating : 0); big.setAttribute('aria-label', starsLabel(s.count ? s.rating : 0));
       $('[data-rv-count]').textContent = !s.count ? t('rvNone') : s.count === 1 ? t('rvBasedOne') : t('rvBasedMany').replace('{n}', s.count.toLocaleString(locale()));
-      const dist = $('[data-rv-dist]'); dist.replaceChildren();
+      const dist = $('[data-rv-dist]');
+      if (!dist) return;   // the home page only shows the average
+      dist.replaceChildren();
       [5, 4, 3, 2, 1].forEach((st, i) => {
         const n = s.dist[i] || 0, li = el('li');
         li.setAttribute('aria-label', t('rvDistRow').replace('{s}', st).replace('{n}', n));
@@ -527,6 +538,16 @@
         $(`[data-rv-cat-v="${k}"]`).textContent = num1(v);
       });
     }
+
+    /* full-size photo viewer */
+    const viewer = $('#rv-viewer'), viewerImg = $('[data-rv-viewer-img]');
+    function openViewer(src, alt, name) {
+      viewerImg.src = src; viewerImg.alt = alt; $('[data-rv-viewer-cap]').textContent = name;
+      viewer.showModal();
+    }
+    $('[data-rv-viewer-close]').addEventListener('click', () => viewer.close());
+    viewer.addEventListener('click', e => { if (e.target === viewer || e.target.tagName === 'FIGURE') viewer.close(); });
+    viewer.addEventListener('close', () => viewerImg.removeAttribute('src'));
 
     /* list */
     function card(r) {
@@ -555,6 +576,30 @@
       li.append(text, foot);
       return li;
     }
+    if (featuredMode) {
+      /* home page: only the best real reviews (4–5 stars), photos first; the section stays hidden until there are some */
+      const FEATURED = 3;
+      let picks = [];
+      const renderFeatured = () => { list.replaceChildren(...picks.map(card)); renderSummary(); };
+      const loadFeatured = async () => {
+        try {
+          const [rows, sum] = await Promise.all([
+            api(`/rest/v1/goianeiro_reviews?select=${COLS}&rating=gte.4&food=gte.4&order=created_at.desc&limit=24`).then(r => (r.ok ? r.json() : Promise.reject(r.status))),
+            api('/rest/v1/rpc/goianeiro_review_summary', { method: 'POST', body: '{}' }).then(r => (r.ok ? r.json() : Promise.reject(r.status))),
+          ]);
+          picks = rows
+            .map((r, i) => ({ r, i }))
+            .sort((a, b) => (!!b.r.photo - !!a.r.photo) || (b.r.rating - a.r.rating) || (b.r.food - a.r.food) || (a.i - b.i))
+            .slice(0, FEATURED).map(x => x.r);
+          summary = sum;
+          if (!picks.length) return;          // nothing to highlight yet: keep the home page clean
+          renderFeatured();
+          rvRoot.hidden = false;
+        } catch { /* reviews are a bonus on the home page: fail silently */ }
+      };
+      langHooks.push(() => { if (picks.length) renderFeatured(); });
+      if (document.readyState === 'complete') loadFeatured(); else addEventListener('load', loadFeatured, { once: true });
+    } else {
     function renderList() {
       list.replaceChildren();
       list.setAttribute('aria-busy', String(enabled && status === 'loading'));
@@ -701,16 +746,6 @@
       return name;
     }
 
-    /* full-size photo viewer */
-    const viewer = $('#rv-viewer'), viewerImg = $('[data-rv-viewer-img]');
-    function openViewer(src, alt, name) {
-      viewerImg.src = src; viewerImg.alt = alt; $('[data-rv-viewer-cap]').textContent = name;
-      viewer.showModal();
-    }
-    $('[data-rv-viewer-close]').addEventListener('click', () => viewer.close());
-    viewer.addEventListener('click', e => { if (e.target === viewer || e.target.tagName === 'FIGURE') viewer.close(); });
-    viewer.addEventListener('close', () => viewerImg.removeAttribute('src'));
-
     function openForm() {
       errBox.hidden = true; done.hidden = true; form.hidden = false;
       sheetRv.showModal();
@@ -768,12 +803,14 @@
     });
 
     buildRatePickers();
+    if (location.hash === '#write') openForm();   // "Write a review" on the home page links here
     langHooks.push(() => { buildRatePickers(); renderSummary(); renderList(); if (photo) photoLabel.textContent = t('fPhotoChange'); });
     // load when the section comes near (saves requests for visitors who never scroll that far)
     new IntersectionObserver((entries, obs) => {
       if (entries[0].isIntersecting) { obs.disconnect(); reload(); }
     }, { rootMargin: '600px 0px' }).observe(rvRoot);
     renderSummary(); renderList();
+    }
   }
 
   /* ---------- gallery lightbox ---------- */
@@ -854,6 +891,7 @@
 
   /* ---------- map: load the embed only when wanted/near ---------- */
   const map = $('[data-map]');
+  if (!map) return;   // reviews.html has no map
   function loadMap() {
     if (map.dataset.loaded) return;
     map.dataset.loaded = '1';
