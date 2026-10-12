@@ -16,7 +16,8 @@ assets/css/styles.css   design system + layout
 assets/js/main.js       CONFIG (address/phones/hours/order link), PT translations, interactions
 assets/img/             AVIF + WebP + JPG at several widths
 assets/video/           MP4 (H.264) + WebM (VP9), muted, with posters
-_source/                original photos (not used by the page; don't deploy)
+media/                  master library of originals: photos, raw videos, Instagram originals, Reels (local only — see media/README.md)
+docs/                   asset & menu inventories, organization report (not deployed)
 ```
 
 ## Avaliações de clientes (Supabase)
@@ -61,7 +62,7 @@ Ready-to-use files in `brand/export/`:
 7. **Domain.** Canonical, Open Graph, JSON-LD and sitemap point to `goianeirorestaurante.com`.
 
 ## Hero 3D
-- Brand film generated in Google Flow (original kept in `_source/hero-flow-original.mp4`), cut into a seamless 7s loop (1s cross-fade end→start).
+- Brand film generated in Google Flow (original kept in `media/videos/promotional/hero-brand-film-google-flow-original.mp4`), cut into a seamless 7s loop (1s cross-fade end→start).
 - Desktop `hero-flow.mp4/.webm` (1280×720, ~1.6 MB); phones get a lighter portrait cut `hero-flow-m.*` (480×720, ~1.1 MB).
 - Layers live at different depths (`--z`) inside one perspective scene; JS only sets `--mx/--my` (pointer) and `--p` (scroll), CSS does the rest.
 - Mouse tilt only on fine-pointer desktops; embers canvas skipped on weak devices / Save-Data; everything static (poster only) with reduced motion.

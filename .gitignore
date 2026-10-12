@@ -1,6 +1,7 @@
 # originals / local tooling (not part of the site)
-_source/
+# media/ = master library of original photos, videos and campaign files (~210 MB, see media/README.md)
+media/*
+!media/README.md
 .claude/
 .prof*/
 *.zip
-marketing/
