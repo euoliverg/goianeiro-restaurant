@@ -19,15 +19,13 @@ assets/video/           MP4 (H.264) + WebM (VP9), muted, with posters
 _source/                original photos (not used by the page; don't deploy)
 ```
 
-## Avaliações de clientes (Supabase) — como ativar
-The reviews section stays **hidden** until it's configured. One-time setup (~5 min):
-1. Create a free account at https://supabase.com → **New project** (any name, e.g. `goianeiro`; save the database password; region: West US).
-2. In the project: **SQL Editor → New query** → paste the whole content of [`supabase/reviews.sql`](supabase/reviews.sql) → **Run**. (Safe to run again.)
-3. **Project Settings → API**: copy the **Project URL** and the **anon / publishable key** (never the `service_role` / secret key).
-4. Paste them in `assets/js/main.js` → `CONFIG.reviews` → `supabaseUrl` and `supabaseKey`, then commit + push. The section and the "Reviews" menu link appear automatically.
+## Avaliações de clientes (Supabase)
+**Live** in the Supabase project `euoliverg's Project` (ref `zogevfuaffiucgbbreds`, free plan), shared with other apps: every object this site uses is prefixed `goianeiro_` (table `goianeiro_reviews`, function `goianeiro_review_summary`, schema `goianeiro_private`, bucket `goianeiro-review-photos`) and nothing else in the project is touched.
+`assets/js/main.js` → `CONFIG.reviews` holds the Project URL and the **publishable** key (safe in the browser). Never put the secret / `service_role` key in the site. If `CONFIG.reviews` is emptied, the section and the "Reviews" menu link disappear.
+To set it up in another project: **SQL Editor → New query** → paste [`supabase/reviews.sql`](supabase/reviews.sql) → **Run** (safe to re-run), then update `CONFIG.reviews`.
 
-**Moderation** (reviews **and photos** publish immediately): Supabase → **Table Editor → reviews** → set `hidden` to `true` on a review to remove it (and its photo) from the site — it isn't deleted. To delete the photo file itself: **Storage → review-photos** → delete the file named in the review's `photo` column.
-**Photos** (optional): resized in the customer's browser to max 1600 px and re-encoded to WebP/JPEG, which also **strips GPS/EXIF data**; stored in the public bucket `review-photos` (created by the SQL script) — max 2 MB, JPG/WebP only, random names, the public key can upload but never overwrite, list or delete; max 5 photos per connection per hour, 60 site-wide. Free plan storage: 1 GB ≈ 10,000+ photos at ~70–150 KB each.
+**Moderation** (reviews **and photos** publish immediately): Supabase → **Table Editor → goianeiro_reviews** → set `hidden` to `true` on a review to remove it (and its photo) from the site — it isn't deleted. To delete the photo file itself: **Storage → goianeiro-review-photos** → delete the file named in the review's `photo` column.
+**Photos** (optional): resized in the customer's browser to max 1600 px and re-encoded to WebP/JPEG, which also **strips GPS/EXIF data**; stored in the public bucket `goianeiro-review-photos` — max 2 MB, JPG/WebP only, random names, the public key can upload but never overwrite, list or delete; max 20 photos per hour and 100 per day site-wide, and the bucket stops accepting uploads at 500 MB (the free plan's 1 GB is shared with the other apps). ~70–150 KB per photo ≈ 3,000+ photos.
 **Built-in protection** (enforced by the database, not the browser): visitors can only add reviews and read visible ones — never edit/delete; ratings 1–5; name 2–40 chars; comment 10–800 chars with **no links**; max **3 reviews per connection per hour** and 40 per hour site-wide; a hidden spam trap in the form.
 No fake/seeded reviews, and no review star markup for Google (Google ignores ratings a business collects about itself on its own site).
 

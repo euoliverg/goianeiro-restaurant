@@ -17,7 +17,8 @@
     // Customer reviews (Supabase). Paste the Project URL and the anon / publishable key
     // from Supabase → Project Settings → API. Both are safe to publish: the database
     // only lets the public read visible reviews and add new ones (see supabase/reviews.sql).
-    reviews: { supabaseUrl: '', supabaseKey: '' },
+    // public (publishable) key only — never the secret / service_role key
+    reviews: { supabaseUrl: 'https://zogevfuaffiucgbbreds.supabase.co', supabaseKey: 'sb_publishable_elXWrCATrKV3YF6-l_PqlQ_Vt86lAhx' },
   };
   const fullAddress = `${CONFIG.address.line1}, ${CONFIG.address.line2}`;
   const directionsUrl = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent('Goianeiro Restaurant, ' + fullAddress);
@@ -483,7 +484,7 @@
     const api = (path, opts = {}) => fetch(base + path, { ...opts, headers: { apikey: RV.supabaseKey, 'Content-Type': 'application/json', ...(opts.headers || {}) } });
     const COLS = 'id,created_at,name,rating,food,service,ambience,visit,dish,comment,lang,photo';
     const ORDER = { new: 'created_at.desc', high: 'rating.desc,created_at.desc', low: 'rating.asc,created_at.desc', photos: 'created_at.desc' };
-    const BUCKET = 'review-photos';
+    const BUCKET = 'goianeiro-review-photos';
     const photoUrl = name => `${base}/storage/v1/object/public/${BUCKET}/${encodeURIComponent(name)}`;
     // Legacy anon keys are JWTs (sent as Bearer too); new publishable keys go in `apikey` only.
     const authHeaders = () => (RV.supabaseKey.startsWith('eyJ') ? { apikey: RV.supabaseKey, Authorization: `Bearer ${RV.supabaseKey}` } : { apikey: RV.supabaseKey });
@@ -584,14 +585,14 @@
 
     async function fetchPage(offset) {
       const filter = sort === 'photos' ? '&photo=not.is.null' : '';
-      const r = await api(`/rest/v1/reviews?select=${COLS}${filter}&order=${ORDER[sort]}&limit=${PAGE + 1}&offset=${offset}`);
+      const r = await api(`/rest/v1/goianeiro_reviews?select=${COLS}${filter}&order=${ORDER[sort]}&limit=${PAGE + 1}&offset=${offset}`);
       if (!r.ok) throw new Error('list ' + r.status);
       const rows = await r.json();
       hasMore = rows.length > PAGE;
       return rows.slice(0, PAGE);
     }
     async function fetchSummary() {
-      const r = await api('/rest/v1/rpc/review_summary', { method: 'POST', body: '{}' });
+      const r = await api('/rest/v1/rpc/goianeiro_review_summary', { method: 'POST', body: '{}' });
       if (!r.ok) throw new Error('summary ' + r.status);
       summary = await r.json();
     }
@@ -747,7 +748,7 @@
           try { data.photo = await uploadPhoto(); }
           catch (er) { fail(er.key || 'ePhotoUp'); return; }
         }
-        const r = await api('/rest/v1/reviews', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(data) });
+        const r = await api('/rest/v1/goianeiro_reviews', { method: 'POST', headers: { Prefer: 'return=minimal' }, body: JSON.stringify(data) });
         if (!r.ok) {
           const j = await r.json().catch(() => ({}));
           const m = j.message || '';
