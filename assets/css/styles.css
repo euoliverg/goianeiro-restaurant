@@ -891,3 +891,18 @@ dialog { color: var(--cream); }
 .rv-list--featured .rv-card { border-color: var(--line-2); background: linear-gradient(160deg, rgba(212, 165, 72, .07), transparent 55%), var(--ink-2); }
 .rv-list--featured .rv-card__text { display: -webkit-box; -webkit-line-clamp: 7; -webkit-box-orient: vertical; overflow: hidden; }
 .rv-feat__ctas { max-width: var(--maxw); margin: clamp(2rem, 4vw, 3rem) auto 0; padding: 0 var(--gutter); display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+/* ---------- buffet: one photo card per dish ---------- */
+.bgrid { list-style: none; margin: .4rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 16px; }
+.bcard { margin: 0; }
+.bcard__media { position: relative; display: block; width: 100%; padding: 0; border: 0; margin: 0; overflow: hidden; background: var(--ink-3); cursor: zoom-in; aspect-ratio: 4 / 5; }
+.bcard__media picture, .bcard__media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.bcard__media img { transition: transform 1.2s var(--ease), filter .6s; }
+.bcard__media::after { content: ""; position: absolute; inset: 0; border: 1px solid var(--gold); opacity: 0; transition: opacity .4s, inset .5s var(--ease); pointer-events: none; }
+.bcard__media:hover img { transform: scale(1.07); filter: brightness(.9); }
+.bcard__media:hover::after { opacity: .7; inset: 8px; }
+.bcard__media:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.bcard__name { margin: .7rem 0 .25rem; font: 400 1.08rem/1.2 var(--f-display); color: var(--cream); }
+.bcard__desc { margin: 0; font-size: .86rem; line-height: 1.45; color: var(--muted); }
+.bgrid + .menu-cat { margin-top: 2.6rem; }
+@media (max-width: 899px) { .bgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; } .bcard__name { font-size: 1rem; } }

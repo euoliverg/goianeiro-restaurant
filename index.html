@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
 <link rel="preload" as="image" href="assets/video/hero-flow-poster.webp" type="image/webp" media="(min-width: 900px)">
 <link rel="preload" as="image" href="assets/video/hero-flow-m-poster.webp" type="image/webp" media="(max-width: 899px)">
-<link rel="stylesheet" href="assets/css/styles.css?v=20261012">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261013">
 
 <script type="application/ld+json">
 {
@@ -455,10 +455,10 @@
     <div class="mpanel">
       <figure class="mpanel__media">
         <picture>
-          <source type="image/avif" srcset="assets/img/buffet-overhead-640.avif 640w, assets/img/buffet-overhead-1080.avif 1080w, assets/img/buffet-overhead-1600.avif 1600w" sizes="(min-width: 900px) 34vw, 92vw">
-          <source type="image/webp" srcset="assets/img/buffet-overhead-640.webp 640w, assets/img/buffet-overhead-1080.webp 1080w, assets/img/buffet-overhead-1600.webp 1600w" sizes="(min-width: 900px) 34vw, 92vw">
-          <img src="assets/img/buffet-overhead-1600.jpg" width="1600" height="739" loading="lazy" decoding="async"
-            alt="Overhead view of the Goianeiro buffet: chicken, stews, rice, beans, pasta, fried cassava with torresmo" data-i18n-attr="alt:altBuffet">
+          <source type="image/avif" srcset="assets/img/buffet-linha-400.avif 400w, assets/img/buffet-linha-720.avif 720w" sizes="(min-width: 900px) 34vw, 92vw">
+          <source type="image/webp" srcset="assets/img/buffet-linha-400.webp 400w, assets/img/buffet-linha-720.webp 720w" sizes="(min-width: 900px) 34vw, 92vw">
+          <img src="assets/img/buffet-linha-720.jpg" width="720" height="900" loading="lazy" decoding="async"
+            alt="The Goianeiro buffet line: torresmo, ground beef, pasta, stews, fried cassava, feijão tropeiro and rice" data-i18n-attr="alt:altBuffet">
         </picture>
       </figure>
       <div class="mpanel__body">
@@ -467,58 +467,160 @@
           <p class="mpanel__when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 1.5"/></svg><span data-i18n="metaBuffet">Eat in or to go</span></p>
         </header>
         <p class="panel__intro" data-i18n="buffetIntro">Hot trays of home cooking from Minas and Goiás, plus churrasco from the grill. Eat in or take a full plate to go.</p>
-        <div class="mshots" data-zoom-group>
-          <figure class="mshot">
-            <button type="button" data-type="image" data-full="assets/img/costelinha-960.webp">
+        <div data-zoom-group>
+        <h4 class="menu-cat" data-i18n="catMeats">Meats</h4>
+        <ul class="bgrid">
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/costelinha-960.webp" data-alt="Tray of oven-roasted pork ribs with parsley" aria-label="View photo: Costelinha assada">
               <picture>
-            <source type="image/avif" srcset="assets/img/costelinha-480.avif" sizes="170px">
-            <source type="image/webp" srcset="assets/img/costelinha-480.webp" sizes="170px">
-            <img src="assets/img/costelinha-480.jpg" width="480" height="600" loading="lazy" decoding="async"
-              alt="Tray of oven-roasted pork ribs with parsley" data-i18n-attr="alt:altCostelinha">
-          </picture>
+                <source type="image/avif" srcset="assets/img/costelinha-480.avif" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/costelinha-480.webp" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/costelinha-480.jpg" width="480" height="600" loading="lazy" decoding="async" alt="Tray of oven-roasted pork ribs with parsley" data-i18n-attr="alt:altCostelinha">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Costelinha assada</h5>
+            <p class="bcard__desc" data-i18n="bDesc13">Oven-roasted pork ribs, well seasoned and finished with parsley</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/bisteca-full.webp" data-alt="Tray of seasoned pork chops" aria-label="View photo: Bisteca de porco">
+              <picture>
+                <source type="image/avif" srcset="assets/img/bisteca-400.avif 400w, assets/img/bisteca-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/bisteca-400.webp 400w, assets/img/bisteca-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/bisteca-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of seasoned pork chops" data-i18n-attr="alt:altBisteca">
+              </picture>
               <span class="mshot__new" data-i18n="tagNew">New</span>
             </button>
-            <figcaption><span data-i18n="bName13">Costelinha assada</span></figcaption>
-          </figure>
-          <figure class="mshot">
-            <button type="button" data-type="image" data-full="assets/img/carne-batata-960.webp">
+            <h5 class="bcard__name">Bisteca de porco</h5>
+            <p class="bcard__desc" data-i18n="bDescBisteca">Seasoned pork chops</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/frango-frito-mandioca-full.webp" data-alt="Tray of fried chicken pieces with fried cassava and green onion" aria-label="View photo: Frango frito com mandioca">
               <picture>
-            <source type="image/avif" srcset="assets/img/carne-batata-480.avif" sizes="170px">
-            <source type="image/webp" srcset="assets/img/carne-batata-480.webp" sizes="170px">
-            <img src="assets/img/carne-batata-480.jpg" width="480" height="600" loading="lazy" decoding="async"
-              alt="Tray of slow-cooked beef stew with potatoes" data-i18n-attr="alt:altCarneBatata">
-          </picture>
-              
+                <source type="image/avif" srcset="assets/img/frango-frito-mandioca-400.avif 400w, assets/img/frango-frito-mandioca-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/frango-frito-mandioca-400.webp 400w, assets/img/frango-frito-mandioca-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/frango-frito-mandioca-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of fried chicken pieces with fried cassava and green onion" data-i18n-attr="alt:altFrangoFrito">
+              </picture>
+              <span class="mshot__new" data-i18n="tagNew">New</span>
             </button>
-            <figcaption><span data-i18n="bName8">Carne com batata</span></figcaption>
-          </figure>
-          <figure class="mshot">
-            <button type="button" data-type="image" data-full="assets/img/mandioca-torresmo-739.webp">
+            <h5 class="bcard__name">Frango frito com mandioca</h5>
+            <p class="bcard__desc" data-i18n="bDescFrangoFrito">Fried chicken with fried cassava</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/carne-batata-960.webp" data-alt="Tray of slow-cooked beef stew with potatoes" aria-label="View photo: Carne com batata">
               <picture>
-            <source type="image/avif" srcset="assets/img/mandioca-torresmo-480.avif" sizes="170px">
-            <source type="image/webp" srcset="assets/img/mandioca-torresmo-480.webp" sizes="170px">
-            <img src="assets/img/mandioca-torresmo-480.jpg" width="480" height="1039" loading="lazy" decoding="async"
-              alt="Wooden bowl of fried cassava and torresmo with sautéed collard greens" data-i18n-attr="alt:altMandioca">
-          </picture>
-              
+                <source type="image/avif" srcset="assets/img/carne-batata-480.avif" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/carne-batata-480.webp" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/carne-batata-480.jpg" width="480" height="600" loading="lazy" decoding="async" alt="Tray of slow-cooked beef stew with potatoes" data-i18n-attr="alt:altCarneBatata">
+              </picture>
             </button>
-            <figcaption>Torresmo &amp; mandioca</figcaption>
-          </figure>
+            <h5 class="bcard__name">Carne com batata</h5>
+            <p class="bcard__desc" data-i18n="bDesc8">Slow-cooked beef with potatoes</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/carne-moida-full.webp" data-alt="Tray of ground beef sautéed with green peppers, onion and tomato" aria-label="View photo: Carne moída refogada">
+              <picture>
+                <source type="image/avif" srcset="assets/img/carne-moida-400.avif 400w, assets/img/carne-moida-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/carne-moida-400.webp 400w, assets/img/carne-moida-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/carne-moida-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of ground beef sautéed with green peppers, onion and tomato" data-i18n-attr="alt:altCarneMoida">
+              </picture>
+              <span class="mshot__new" data-i18n="tagNew">New</span>
+            </button>
+            <h5 class="bcard__name">Carne moída refogada</h5>
+            <p class="bcard__desc" data-i18n="bDescCarneMoida">Ground beef sautéed with bell peppers, onion and tomato</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/salsicha-milho-full.webp" data-alt="Tray of sliced sausage in tomato sauce with corn" aria-label="View photo: Salsicha ao molho com milho">
+              <picture>
+                <source type="image/avif" srcset="assets/img/salsicha-milho-400.avif 400w, assets/img/salsicha-milho-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/salsicha-milho-400.webp 400w, assets/img/salsicha-milho-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/salsicha-milho-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of sliced sausage in tomato sauce with corn" data-i18n-attr="alt:altSalsicha">
+              </picture>
+              <span class="mshot__new" data-i18n="tagNew">New</span>
+            </button>
+            <h5 class="bcard__name">Salsicha ao molho com milho</h5>
+            <p class="bcard__desc" data-i18n="bDescSalsicha">Sliced sausage in tomato sauce with corn</p>
+          </li>
+        </ul>
+        <h4 class="menu-cat" data-i18n="catBuffetSides">Sides &amp; salads</h4>
+        <ul class="bgrid">
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/feijao-tropeiro-bandeja-full.webp" data-alt="Tray of feijão tropeiro: beans and toasted cassava flour topped with boiled eggs" aria-label="View photo: Feijão tropeiro">
+              <picture>
+                <source type="image/avif" srcset="assets/img/feijao-tropeiro-bandeja-400.avif 400w, assets/img/feijao-tropeiro-bandeja-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/feijao-tropeiro-bandeja-400.webp 400w, assets/img/feijao-tropeiro-bandeja-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/feijao-tropeiro-bandeja-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of feijão tropeiro: beans and toasted cassava flour topped with boiled eggs" data-i18n-attr="alt:altTropeiro">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Feijão tropeiro</h5>
+            <p class="bcard__desc" data-i18n="bDesc2">Beans with toasted cassava flour, served with boiled eggs</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/torresmo-full.webp" data-alt="Dish of crackling torresmo (fried pork belly)" aria-label="View photo: Torresmo">
+              <picture>
+                <source type="image/avif" srcset="assets/img/torresmo-400.avif 400w, assets/img/torresmo-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/torresmo-400.webp 400w, assets/img/torresmo-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/torresmo-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Dish of crackling torresmo (fried pork belly)" data-i18n-attr="alt:altTorresmo">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Torresmo</h5>
+            <p class="bcard__desc" data-i18n="bDescTorresmo">Crackling fried pork belly</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/mandioca-frita-full.webp" data-alt="Bowl of golden fried cassava" aria-label="View photo: Mandioca frita">
+              <picture>
+                <source type="image/avif" srcset="assets/img/mandioca-frita-400.avif 400w, assets/img/mandioca-frita-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/mandioca-frita-400.webp 400w, assets/img/mandioca-frita-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/mandioca-frita-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Bowl of golden fried cassava" data-i18n-attr="alt:altMandiocaFrita">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Mandioca frita</h5>
+            <p class="bcard__desc" data-i18n="bDescMandioca">Golden fried cassava</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/polenta-queijo-full.webp" data-alt="Tray of creamy polenta topped with melted cheese" aria-label="View photo: Polenta cremosa com queijo">
+              <picture>
+                <source type="image/avif" srcset="assets/img/polenta-queijo-400.avif 400w, assets/img/polenta-queijo-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/polenta-queijo-400.webp 400w, assets/img/polenta-queijo-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/polenta-queijo-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tray of creamy polenta topped with melted cheese" data-i18n-attr="alt:altPolenta">
+              </picture>
+              <span class="mshot__new" data-i18n="tagNew">New</span>
+            </button>
+            <h5 class="bcard__name">Polenta cremosa com queijo</h5>
+            <p class="bcard__desc" data-i18n="bDescPolenta">Creamy polenta topped with melted cheese</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/couve-full.webp" data-alt="Bowl of collard greens sautéed in garlic" aria-label="View photo: Couve refogada">
+              <picture>
+                <source type="image/avif" srcset="assets/img/couve-400.avif 400w, assets/img/couve-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/couve-400.webp 400w, assets/img/couve-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/couve-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Bowl of collard greens sautéed in garlic" data-i18n-attr="alt:altCouve">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Couve refogada</h5>
+            <p class="bcard__desc" data-i18n="bDesc5">Collard greens sautéed in garlic</p>
+          </li>
+          <li class="bcard">
+            <button type="button" class="bcard__media" data-type="image" data-full="assets/img/saladas-full.webp" data-alt="Salad bar: greens, boiled eggs, vinaigrette, beets, potato salad and tomatoes" aria-label="View photo: Saladas">
+              <picture>
+                <source type="image/avif" srcset="assets/img/saladas-400.avif 400w, assets/img/saladas-720.avif 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <source type="image/webp" srcset="assets/img/saladas-400.webp 400w, assets/img/saladas-720.webp 720w" sizes="(min-width: 900px) 200px, 45vw">
+                <img src="assets/img/saladas-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Salad bar: greens, boiled eggs, vinaigrette, beets, potato salad and tomatoes" data-i18n-attr="alt:altSaladas">
+              </picture>
+            </button>
+            <h5 class="bcard__name">Saladas</h5>
+            <p class="bcard__desc" data-i18n="bDesc12">Fresh salads, vinaigrette & eggs</p>
+          </li>
+        </ul>
         </div>
+        <h4 class="menu-cat" data-i18n="catAlso">Also on the buffet</h4>
         <ul class="mlist mlist--2">
           <li><div class="mlist__row"><span class="mlist__name">Churrasco na brasa</span></div><p class="mlist__desc" data-i18n="bDesc1">Grilled meats off the skewer</p></li>
-          <li><div class="mlist__row"><span class="mlist__name">Feijão tropeiro</span></div><p class="mlist__desc" data-i18n="bDesc2">Beans, cassava flour, pork belly &amp; greens</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Feijoada</span></div><p class="mlist__desc" data-i18n="bDesc3">Black bean &amp; pork stew, on feijoada days</p></li>
-          <li><div class="mlist__row"><span class="mlist__name">Torresmo &amp; mandioca frita</span></div><p class="mlist__desc" data-i18n="bDesc4">Crackling pork belly &amp; fried cassava</p></li>
-          <li><div class="mlist__row"><span class="mlist__name">Couve refogada</span></div><p class="mlist__desc" data-i18n="bDesc5">Collard greens sautéed in garlic</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Farofa</span></div><p class="mlist__desc" data-i18n="bDesc6">Toasted cassava flour with egg</p></li>
           <li><div class="mlist__row"><span class="mlist__name">Bife à milanesa</span></div><p class="mlist__desc" data-i18n="bDesc7">Breaded steak cutlets</p></li>
-          <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName13">Costelinha assada</span><span class="tag tag--new" data-i18n="tagNew">New</span></div><p class="mlist__desc" data-i18n="bDesc13">Oven-roasted pork ribs, seasoned and finished with parsley</p></li>
-          <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName8">Carne com batata</span></div><p class="mlist__desc" data-i18n="bDesc8">Slow-cooked beef with potatoes</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName9">Frango assado</span></div><p class="mlist__desc" data-i18n="bDesc9">Roasted chicken</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName10">Banana frita</span></div><p class="mlist__desc" data-i18n="bDesc10">Fried sweet plantains</p></li>
           <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName11">Arroz &amp; feijão</span></div><p class="mlist__desc" data-i18n="bDesc11">Rice and beans, every day</p></li>
-          <li><div class="mlist__row"><span class="mlist__name" data-i18n="bName12">Saladas</span></div><p class="mlist__desc" data-i18n="bDesc12">Fresh salads, vinaigrette &amp; eggs</p></li>
         </ul>
         <p class="note" data-i18n="buffetNote">Dishes rotate — these have all appeared on our buffet. Ask the team what’s on today.</p>
       </div>
@@ -770,6 +872,30 @@
       <img src="assets/img/buffet-overhead-640.webp" width="640" height="296" loading="lazy" decoding="async" alt="The Goianeiro buffet seen from above">
       <span class="tile__cap">Buffet</span>
     </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/buffet-linha-full.webp" aria-label="The buffet line">
+      <img src="assets/img/buffet-linha-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="The Goianeiro buffet line with hot trays">
+      <span class="tile__cap" data-i18n="gBuffetHot">The buffet line</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/frango-frito-mandioca-full.webp" aria-label="Frango frito com mandioca">
+      <img src="assets/img/frango-frito-mandioca-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="Fried chicken with fried cassava">
+      <span class="tile__cap">Frango frito com mandioca</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/bisteca-full.webp" aria-label="Bisteca de porco">
+      <img src="assets/img/bisteca-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="Seasoned pork chops">
+      <span class="tile__cap">Bisteca de porco</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/feijao-tropeiro-bandeja-full.webp" aria-label="Feijão tropeiro">
+      <img src="assets/img/feijao-tropeiro-bandeja-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="Feijão tropeiro topped with boiled eggs">
+      <span class="tile__cap">Feijão tropeiro</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/saladas-full.webp" aria-label="Saladas">
+      <img src="assets/img/saladas-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="The salad bar">
+      <span class="tile__cap">Saladas</span>
+    </button>
+    <button class="tile" data-type="image" data-cat="buffet" data-full="assets/img/polenta-queijo-full.webp" aria-label="Polenta cremosa">
+      <img src="assets/img/polenta-queijo-400.webp" width="400" height="500" loading="lazy" decoding="async" alt="Creamy polenta with melted cheese">
+      <span class="tile__cap">Polenta cremosa</span>
+    </button>
     <button class="tile tile--video tile--feature" data-type="video" data-cat="dishes video" data-full="assets/video/espetinho" data-poster="assets/video/espetinho-poster.webp" aria-label="Play video: Prato com espetinho">
       <img src="assets/video/espetinho-poster.webp" width="478" height="850" loading="lazy" decoding="async" alt="">
       <span class="tile__play" aria-hidden="true"></span><span class="tile__dur">0:11</span>
@@ -1005,6 +1131,6 @@
   <p class="lightbox__count" data-lb-count></p>
 </dialog>
 
-<script src="assets/js/main.js?v=20261012" defer></script>
+<script src="assets/js/main.js?v=20261013" defer></script>
 </body>
 </html>
