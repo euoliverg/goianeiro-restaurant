@@ -26,6 +26,12 @@
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+
+  // Old one-page links (/#menu, /#visit …) keep working: those sections now have their own pages.
+  const MOVED = { menu: 'menu.html', kitchen: 'about.html#kitchen', experience: 'about.html#experience', gallery: 'about.html#gallery', visit: 'contact.html' };
+  const oldHash = location.hash.slice(1);
+  if (MOVED[oldHash] && !document.getElementById(oldHash)) { location.replace(MOVED[oldHash]); return; }
+
   const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const conn = navigator.connection || {};
   const liteMode = reduceMotion || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
@@ -44,6 +50,12 @@
     skip: 'Pular para o conteúdo',
     brandSub: 'Restaurante',
     navMenu: 'Cardápio', navKitchen: 'Cozinha', navExperience: 'Experiência', navGallery: 'Galeria', navVisit: 'Visite',
+    navAbout: 'Sobre', navContact: 'Contato', fExplore: 'Explorar', ctaHoursMap: 'Horários, telefones e mapa', storyMore: 'Nossa história e cozinha',
+    hlPlates: 'Carne na brasa com todos os acompanhamentos no mesmo prato.', hlBuffet: 'Bandejas quentinhas de comida caseira de Minas e Goiás.',
+    hlBurgers: 'Hambúrguer brasileiro caprichado: X-Tudo, X-Bacon e mais.', hlSweets: 'Pudim, pavê e copinhos.',
+    altBurgerMilho: 'Hambúrguer brasileiro com carne, milho e alface', altBurgerTorre: 'Hambúrguer alto com ovo, queijo e alface, servido com batata frita',
+    altPudimCalda: 'Pudim de leite inteiro com calda de caramelo, visto de cima', altPudimDuplo: 'Dois pudins de leite com calda brilhante',
+    capBurgerMilho: 'Carne, milho e alface', capBurgerTorre: 'Caprichado, com fritas', gCostela: 'Soltando do osso', gBurger: 'Hambúrguer brasileiro',
     ctaOrder: 'Peça agora', ctaMenu: 'Ver cardápio', ctaMenuFull: 'Ver o cardápio completo', ctaDirections: 'Como chegar',
     ctaCall: 'Ligar agora', ctaReserve: 'Reservar mesa', ctaOrderPlate: 'Peça seu prato para viagem',
     heroEyebrow: 'Restaurante brasileiro · Kirkland, WA',
@@ -209,7 +221,10 @@
       title: document.title,
       desc: $('meta[name="description"]').content,
     },
-    pt: onReviewsPage ? {
+    pt: document.documentElement.dataset.titlePt ? {
+      title: document.documentElement.dataset.titlePt,
+      desc: document.documentElement.dataset.descPt,
+    } : onReviewsPage ? {
       title: 'Avaliações | Restaurante Goianeiro · Comida brasileira em Kirkland, WA',
       desc: 'O que os clientes dizem do Goianeiro, restaurante brasileiro de Minas e Goiás em Kirkland, WA: notas para a comida, o atendimento e o ambiente, com fotos. Deixe a sua avaliação.',
     } : {
@@ -290,13 +305,6 @@
     if (y < lastY - 4) header.classList.remove('is-hidden');
     lastY = y;
   }, { passive: true });
-
-  // active nav link
-  const navLinks = $$('.nav a');
-  const sectionObs = new IntersectionObserver(entries => entries.forEach(e => {
-    if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + e.target.id));
-  }), { rootMargin: '-45% 0px -50% 0px' });
-  ['menu', 'kitchen', 'experience', 'gallery', 'visit'].forEach(id => { const s = document.getElementById(id); if (s) sectionObs.observe(s); });
 
   /* ---------- reveal on scroll ---------- */
   // Clip-reveal frames start fully clipped, and browsers count an element's own clip-path
@@ -458,6 +466,9 @@
     });
     if (focus) tab.focus();
   }
+  const tabFromHash = () => { const tb = document.getElementById('tab-' + ({ desserts: 'sweets' }[location.hash.slice(1)] || location.hash.slice(1))); if (tb && tb.getAttribute('role') === 'tab') selectTab(tb); };
+  tabFromHash();
+  addEventListener('hashchange', tabFromHash);
   tabs.forEach((tab, i) => {
     tab.addEventListener('click', () => selectTab(tab));
     tab.addEventListener('keydown', e => {

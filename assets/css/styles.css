@@ -557,7 +557,7 @@ em { font-style: italic; }
 .footer__mark { width: 92px; flex: none; color: var(--gold); }
 .footer__word { font: 600 1.9rem/1 var(--f-display); font-variation-settings: "opsz" 72; letter-spacing: .16em; margin: 0 0 .6rem; }
 .footer__tag { margin: 0; font: italic 300 1.05rem/1 var(--f-display); color: var(--gold); }
-.footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.footer__cols { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
 .footer__cols h3 { font: 600 .7rem/1 var(--f-ui); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin: 0 0 1rem; }
 .footer__cols p { margin: 0 0 .6rem; color: var(--muted); font-size: .95rem; }
 .footer__cols a { text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .3s, color .3s; }
@@ -906,3 +906,59 @@ dialog { color: var(--cream); }
 .bcard__desc { margin: 0; font-size: .86rem; line-height: 1.45; color: var(--muted); }
 .bgrid + .menu-cat { margin-top: 2.6rem; }
 @media (max-width: 899px) { .bgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; } .bcard__name { font-size: 1rem; } }
+
+/* =========================================================
+   Multi-page layout (Home · Menu · About · Contact · Reviews)
+   ========================================================= */
+/* inner pages open with their own title under the fixed header */
+.page-top { padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem)) !important; }
+.nav a[aria-current="page"] { color: var(--cream); }
+
+/* ---------- home: menu highlights ---------- */
+.highlights { padding: clamp(5rem, 10vw, 9rem) 0 clamp(3rem, 6vw, 5rem); }
+.highlights .section-head { margin-bottom: clamp(2.2rem, 5vw, 3.6rem); }
+.hl-grid { list-style: none; margin: 0 auto; padding: 0 var(--gutter); max-width: var(--maxw); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(14px, 1.6vw, 24px); }
+.hl-card a { display: flex; flex-direction: column; height: 100%; text-decoration: none; background: var(--ink-2); border: 1px solid var(--line); transition: border-color .5s var(--ease), transform .6s var(--ease); }
+.hl-card__media { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--ink-3); }
+.hl-card__media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.01); transition: transform 1.1s var(--ease), filter .6s; filter: saturate(.95); }
+.hl-card__body { position: relative; padding: 1.2rem 1.2rem 1.4rem; flex: 1; }
+.hl-card__meta { margin: 0 0 .5rem; font: 600 .62rem/1.3 var(--f-ui); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.hl-card__name { margin: 0 0 .45rem; font: 400 clamp(1.35rem, 1.9vw, 1.7rem)/1.1 var(--f-display); color: var(--cream); padding-right: 1.6rem; }
+.hl-card__desc { margin: 0; color: var(--muted); font-size: .93rem; line-height: 1.5; }
+.hl-card__go { position: absolute; top: 1.15rem; right: 1.2rem; color: var(--gold-2); font-size: 1.2rem; transition: transform .5s var(--ease); }
+.hl-card a:hover, .hl-card a:focus-visible { border-color: var(--line-2); transform: translateY(-4px); }
+.hl-card a:hover img, .hl-card a:focus-visible img { transform: scale(1.06); filter: saturate(1.05); }
+.hl-card a:hover .hl-card__go { transform: translateX(5px); }
+
+/* ---------- home: story link, visit strip ---------- */
+.story__more { margin: -.6rem 0 1.6rem; }
+.vstrip {
+  max-width: var(--maxw); margin: 0 auto; padding: clamp(5rem, 10vw, 8rem) var(--gutter);
+  display: grid; grid-template-columns: 7fr 5fr; gap: clamp(2rem, 6vw, 6rem); align-items: end;
+  border-top: 1px solid var(--line);
+}
+.vstrip .visit__address { margin: 2rem 0 1rem; }
+.vstrip__status { margin: 0 0 1.8rem; }
+.vstrip .visit__ctas { margin-bottom: 0; align-items: center; }
+.visit .vstrip__status { margin: 1.8rem 0 0; }
+
+/* ---------- menu page: burger photos ---------- */
+.mshots--2 { grid-template-columns: repeat(2, minmax(0, 210px)); margin-top: .4rem; }
+
+@media (max-width: 1100px) {
+  .hl-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 899px) {
+  .vstrip { grid-template-columns: 1fr; align-items: start; }
+  .hl-card__body { padding: .9rem .9rem 1.1rem; }
+  .hl-card__desc { font-size: .86rem; }
+  .hl-card__go { top: .85rem; right: .85rem; }
+  .mshots--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 420px) {
+  .hl-grid { gap: 10px; }
+  .hl-card__name { font-size: 1.15rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hl-card a, .hl-card__media img { transition: none; }
+}
