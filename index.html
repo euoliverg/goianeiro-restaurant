@@ -31,10 +31,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
-<link rel="preload" as="image" href="assets/video/hero-flow-poster.webp" type="image/webp" media="(min-width: 900px)">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
+<link rel="preload" as="image" href="assets/video/hero-flow-poster.webp" type="image/webp" media="(min-width: 900px)" fetchpriority="high">
 <link rel="preload" as="image" href="assets/video/hero-flow-m-poster.webp" type="image/webp" media="(max-width: 899px)">
-<link rel="stylesheet" href="assets/css/styles.css?v=20261015">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261017b">
 
 <script type="application/ld+json">
 {
@@ -138,6 +138,9 @@
 
 <!-- ================= HEADER ================= -->
 <header class="site-header" id="top">
+  <button type="button" class="menu-btn" aria-controls="drawer" aria-expanded="false" aria-label="Open menu" data-drawer-open>
+    <span></span><span></span><span></span>
+  </button>
   <a class="brand" href="index.html" aria-label="Goianeiro Restaurant, home" aria-current="page">
     <svg class="brand__mark" viewBox="0 0 200 190" aria-hidden="true"><use href="#g-mark"/></svg>
     <span class="brand__word">
@@ -153,6 +156,7 @@
     <a href="contact.html" data-i18n="navContact">Contact</a>
   </nav>
   <div class="header__actions">
+    <a class="findus" href="contact.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg><span data-i18n="findUs">Kirkland, WA</span></a>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" aria-pressed="true"><svg class="flag" viewBox="0 0 19 13" aria-hidden="true"><path fill="#b22234" d="M0 0h19v13H0z"/><path stroke="#fff" d="M0 1.5h19M0 3.5h19M0 5.5h19M0 7.5h19M0 9.5h19M0 11.5h19"/><path fill="#3c3b6e" d="M0 0h8v7H0z"/></svg> EN</button>
       <button type="button" data-lang="pt" aria-pressed="false"><svg class="flag" viewBox="0 0 19 13" aria-hidden="true"><path fill="#009c3b" d="M0 0h19v13H0z"/><path fill="#ffdf00" d="M9.5 1.5 17 6.5l-7.5 5-7.5-5z"/><circle cx="9.5" cy="6.5" r="2.9" fill="#002776"/></svg> PT</button>
@@ -163,71 +167,26 @@
 
 <main id="main">
 
-<!-- ================= HERO ================= -->
-<section class="hero hero--3d" aria-labelledby="hero-title" data-hero>
-  <div class="h3d" data-h3d>
-    <div class="h3d__scene">
-      <span class="h3d__layer h3d__word" style="--z:-420px" aria-hidden="true">GOIANEIRO</span>
-      <span class="h3d__layer h3d__glow" style="--z:-160px" aria-hidden="true"></span>
-      <span class="h3d__layer h3d__frame" style="--z:-80px" aria-hidden="true"></span>
-      <figure class="h3d__layer h3d__panel" style="--z:0px">
-        <video class="h3d__video" data-autoplay muted loop playsinline preload="none"
-          poster="assets/video/hero-flow-poster.webp" data-poster-m="assets/video/hero-flow-m-poster.webp"
-          aria-label="Brand film: a skewer of picanha turning over glowing embers">
-          <source data-src="assets/video/hero-flow.mp4" data-src-m="assets/video/hero-flow-m.mp4" type="video/mp4">
-          <source data-src="assets/video/hero-flow.webm" data-src-m="assets/video/hero-flow-m.webm" type="video/webm">
-        </video>
-        <span class="h3d__sheen" aria-hidden="true"></span>
-      </figure>
-      <canvas class="h3d__layer h3d__embers" style="--z:90px" aria-hidden="true"></canvas>
-      <p class="h3d__layer h3d__tag" style="--z:150px" aria-hidden="true">
-        <svg viewBox="0 0 200 190"><use href="#g-mark"/></svg>
-        <span>Churrasco <em>na brasa</em></span>
-      </p>
-      <div class="h3d__layer h3d__seal" style="--z:220px">
-        <svg class="hero__seal" viewBox="0 0 320 320" role="img" aria-label="Goianeiro seal: Minas e Goiás, sabor de casa">
-      <defs>
-        <path id="seal-top" d="M40 160a120 120 0 0 1 240 0"/>
-        <path id="seal-bot" d="M34 160a126 126 0 0 0 252 0"/>
-      </defs>
-      <circle cx="160" cy="160" r="156" fill="#0d0b09"/>
-      <circle cx="160" cy="160" r="150" fill="none" stroke="#d4a548" stroke-width="1.5"/>
-      <circle cx="160" cy="160" r="96" fill="none" stroke="#d4a548" stroke-width="1"/>
-      <g class="seal__ring">
-        <text fill="#f3e8d2" font-family="Fraunces, serif" font-size="26" font-weight="600" letter-spacing="6"><textPath href="#seal-top" startOffset="50%" text-anchor="middle">GOIANEIRO</textPath></text>
-        <text fill="#d4a548" font-family="Archivo, sans-serif" font-size="12.5" font-weight="600" letter-spacing="5.5"><textPath href="#seal-bot" startOffset="50%" text-anchor="middle">MINAS E GOIÁS · SABOR DE CASA</textPath></text>
-        <rect x="7" y="149" width="32" height="22.4" fill="#0d0b09"/>
-        <rect x="281" y="149" width="32" height="22.4" fill="#0d0b09"/>
-        <use href="#g-flag-us" x="11" y="152" width="24" height="16.4"/>
-        <use href="#g-flag-br" x="285" y="152" width="24" height="16.4"/>
-      </g>
-      <use href="#g-mark" x="98" y="100" width="124" height="118" color="#d4a548"/>
-    </svg>
-      </div>
+<!-- ================= HERO (full-bleed film) ================= -->
+<section class="ohero" aria-labelledby="hero-title">
+  <video class="ohero__video" data-autoplay muted loop playsinline preload="none"
+    poster="assets/video/hero-flow-poster.webp" data-poster-m="assets/video/hero-flow-m-poster.webp"
+    aria-label="Brand film: a skewer of picanha turning over glowing embers">
+    <source data-src="assets/video/hero-flow.mp4" data-src-m="assets/video/hero-flow-m.mp4" type="video/mp4">
+    <source data-src="assets/video/hero-flow.webm" data-src-m="assets/video/hero-flow-m.webm" type="video/webm">
+  </video>
+  <div class="ohero__shade" aria-hidden="true"></div>
+  <div class="ohero__copy">
+    <p class="ohero__eyebrow" data-enter="1"><svg viewBox="0 0 200 190" aria-hidden="true"><use href="#g-mark"/></svg><span data-i18n="heroEyebrow">Brazilian restaurant · Kirkland, WA</span></p>
+    <h1 id="hero-title" class="ohero__title" data-enter="2"><span data-i18n="heroTitle1">The taste</span> <em data-i18n="heroTitle2">of Brazil.</em></h1>
+    <p class="ohero__lede" data-enter="3" data-i18n="heroLede">Real home cooking from Minas Gerais and Goiás — a hot buffet, churrasco off the grill, Brazilian burgers and warm pão de queijo. Minutes from Seattle.</p>
+    <div class="ohero__ctas" data-enter="4">
+      <a class="btn btn--red btn--lg" href="menu.html" data-i18n="ctaMenu">View menu</a>
+      <button type="button" class="btn btn--white btn--lg" data-open-order data-i18n="ctaOrder">Order now</button>
     </div>
+    <p class="ohero__status" data-enter="5"><span class="status" data-status aria-live="polite"></span></p>
   </div>
-
-  <div class="hero__copy">
-    <p class="hero__brand" data-enter="4">
-      <svg class="hero__brand-mark" viewBox="0 0 200 190" aria-hidden="true"><use href="#g-mark"/></svg>
-      <span class="hero__brand-word">GOIANEIRO</span>
-      <svg class="flag-mark" viewBox="0 0 19 13" aria-hidden="true"><use href="#g-flag-us"/></svg>
-      <svg class="flag-mark" viewBox="0 0 19 13" aria-hidden="true"><use href="#g-flag-br"/></svg>
-    </p>
-    <p class="eyebrow" data-enter="5"><span class="dot"></span> <span data-i18n="heroEyebrow">Brazilian restaurant · Kirkland, WA</span></p>
-    <h1 id="hero-title" class="hero__title" data-enter="6">
-      <span data-i18n="heroTitle1">The taste</span>
-      <em data-i18n="heroTitle2">of Brazil.</em>
-    </h1>
-    <p class="hero__lede" data-enter="7" data-i18n="heroLede">Real home cooking from Minas Gerais and Goiás — a hot buffet, churrasco off the grill, Brazilian burgers and warm pão de queijo. Minutes from Seattle.</p>
-    <div class="hero__ctas" data-enter="8">
-      <a class="btn btn--gold" href="menu.html" data-i18n="ctaMenu">View menu</a>
-      <button type="button" class="btn btn--line" data-open-order data-i18n="ctaOrder">Order now</button>
-      <a class="btn btn--text" data-directions target="_blank" rel="noopener" href="contact.html"><span data-i18n="ctaDirections">Get directions</span> <span aria-hidden="true">→</span></a>
-    </div>
-    <p class="hero__status" data-enter="9"><span class="status" data-status aria-live="polite"></span></p>
-  </div>
-  <a class="hero__scroll" href="#highlights" aria-label="Scroll"><span></span></a>
+  <button type="button" class="ohero__pause" data-hero-pause aria-pressed="false"><span data-i18n="pauseVideo">Pause video</span></button>
 </section>
 
 <!-- ================= MARQUEE ================= -->
@@ -238,77 +197,135 @@
   </div>
 </div>
 
-<!-- ================= MENU HIGHLIGHTS (full menu: menu.html) ================= -->
-<section class="highlights" id="highlights" aria-labelledby="hl-title">
-  <header class="section-head section-head--split">
-    <div>
-      <p class="kicker" data-reveal data-i18n="menuKicker">The menu</p>
-      <h2 id="hl-title" class="display display--xl" data-reveal><span data-i18n="menuTitle1">Brazil,</span> <em data-i18n="menuTitle2">plate by plate.</em></h2>
-    </div>
-    <a class="btn btn--line" href="menu.html" data-reveal data-i18n="ctaMenuFull">See the full menu</a>
-  </header>
-  <ul class="hl-grid">
-    <li class="hl-card" data-reveal>
-      <a href="menu.html#plates">
-        <figure class="hl-card__media"><picture>
-          <source type="image/avif" srcset="assets/img/espetinho-prato-480.avif 480w, assets/img/espetinho-prato-924.avif 924w" sizes="(min-width: 900px) 25vw, 46vw">
-          <source type="image/webp" srcset="assets/img/espetinho-prato-480.webp 480w, assets/img/espetinho-prato-924.webp 924w" sizes="(min-width: 900px) 25vw, 46vw">
-          <img src="assets/img/espetinho-prato-480.jpg" width="480" height="600" loading="lazy" decoding="async" alt="Plate with a grilled beef skewer, beans, rice, pasta, lettuce, tomato, fried cassava and torresmo" data-i18n-attr="alt:altEspPrato">
-        </picture></figure>
-        <div class="hl-card__body">
-          <p class="hl-card__meta" data-i18n="metaPlates">Off the grill · new</p>
-          <h3 class="hl-card__name" data-i18n="tabPlates">House plates</h3>
-          <p class="hl-card__desc" data-i18n="hlPlates">Meat off the grill with every side on the same plate.</p>
-          <span class="hl-card__go" aria-hidden="true">→</span>
-        </div>
-      </a>
-    </li>
-    <li class="hl-card" data-reveal>
-      <a href="menu.html#buffet">
-        <figure class="hl-card__media"><picture>
-          <source type="image/avif" srcset="assets/img/buffet-linha-400.avif 400w, assets/img/buffet-linha-720.avif 720w" sizes="(min-width: 900px) 25vw, 46vw">
-          <source type="image/webp" srcset="assets/img/buffet-linha-400.webp 400w, assets/img/buffet-linha-720.webp 720w" sizes="(min-width: 900px) 25vw, 46vw">
-          <img src="assets/img/buffet-linha-720.jpg" width="720" height="900" loading="lazy" decoding="async" alt="The Goianeiro buffet line with hot trays" data-i18n-attr="alt:altBuffet">
-        </picture></figure>
-        <div class="hl-card__body">
-          <p class="hl-card__meta" data-i18n="metaBuffet">Eat in or to go</p>
-          <h3 class="hl-card__name" data-i18n="tabBuffet">Buffet</h3>
-          <p class="hl-card__desc" data-i18n="hlBuffet">Hot trays of home cooking from Minas and Goiás.</p>
-          <span class="hl-card__go" aria-hidden="true">→</span>
-        </div>
-      </a>
-    </li>
-    <li class="hl-card" data-reveal>
+<!-- ================= PROMOS ================= -->
+<section class="promos light" aria-label="Featured">
+  <ul class="promo-grid">
+    <li class="promo" data-reveal>
       <a href="menu.html#burgers">
-        <figure class="hl-card__media"><picture>
-          <source type="image/avif" srcset="assets/img/burger-milho-400.avif 400w, assets/img/burger-milho-720.avif 720w" sizes="(min-width: 900px) 25vw, 46vw">
-          <source type="image/webp" srcset="assets/img/burger-milho-400.webp 400w, assets/img/burger-milho-720.webp 720w" sizes="(min-width: 900px) 25vw, 46vw">
+        <picture>
+          <source type="image/avif" srcset="assets/img/burger-milho-720.avif">
+          <source type="image/webp" srcset="assets/img/burger-milho-720.webp">
           <img src="assets/img/burger-milho-720.jpg" width="720" height="900" loading="lazy" decoding="async" alt="Brazilian burger piled with steak, sweet corn and lettuce" data-i18n-attr="alt:altBurgerMilho">
-        </picture></figure>
-        <div class="hl-card__body">
-          <p class="hl-card__meta" data-i18n="metaBurgers">Thu – Sun · 5 – 10 PM</p>
-          <h3 class="hl-card__name" data-i18n="tabBurgers">Brazilian Burgers</h3>
-          <p class="hl-card__desc" data-i18n="hlBurgers">Stacked high, Brazilian style: X-Tudo, X-Bacon and more.</p>
-          <span class="hl-card__go" aria-hidden="true">→</span>
-        </div>
+        </picture>
+        <span class="promo__body">
+          <span class="promo__kick" data-i18n="metaBurgers">Thu – Sun · 5 – 10 PM</span>
+          <span class="promo__title" data-i18n="tabBurgers">Brazilian Burgers</span>
+          <span class="btn btn--white btn--sm promo__cta" data-i18n="ctaSeeBurgers">See the burgers</span>
+        </span>
       </a>
     </li>
-    <li class="hl-card" data-reveal>
-      <a href="menu.html#desserts">
-        <figure class="hl-card__media"><picture>
-          <source type="image/avif" srcset="assets/img/pudim-calda-400.avif 400w, assets/img/pudim-calda-720.avif 720w" sizes="(min-width: 900px) 25vw, 46vw">
-          <source type="image/webp" srcset="assets/img/pudim-calda-400.webp 400w, assets/img/pudim-calda-720.webp 720w" sizes="(min-width: 900px) 25vw, 46vw">
-          <img src="assets/img/pudim-calda-720.jpg" width="720" height="900" loading="lazy" decoding="async" alt="Whole pudim de leite glazed in caramel, seen from above" data-i18n-attr="alt:altPudimCalda">
-        </picture></figure>
-        <div class="hl-card__body">
-          <p class="hl-card__meta" data-i18n="metaSweets">Ask for today’s selection</p>
-          <h3 class="hl-card__name" data-i18n="tabSweets">Desserts</h3>
-          <p class="hl-card__desc" data-i18n="hlSweets">Pudim, pavê and dessert cups.</p>
-          <span class="hl-card__go" aria-hidden="true">→</span>
-        </div>
+    <li class="promo" data-reveal>
+      <a href="menu.html#buffet">
+        <picture>
+          <source type="image/avif" srcset="assets/img/buffet-linha-720.avif">
+          <source type="image/webp" srcset="assets/img/buffet-linha-720.webp">
+          <img src="assets/img/buffet-linha-720.jpg" width="720" height="900" loading="lazy" decoding="async" alt="The Goianeiro buffet line with hot trays" data-i18n-attr="alt:altBuffet">
+        </picture>
+        <span class="promo__body">
+          <span class="promo__kick" data-i18n="metaBuffet">Eat in or to go</span>
+          <span class="promo__title" data-i18n="promoBuffet">Hot Brazilian buffet</span>
+          <span class="btn btn--white btn--sm promo__cta" data-i18n="ctaSeeBuffet">See the buffet</span>
+        </span>
+      </a>
+    </li>
+    <li class="promo" data-reveal>
+      <a href="menu.html#breakfast">
+        <picture>
+          <source type="image/avif" srcset="assets/img/pao-de-queijo-739.avif">
+          <source type="image/webp" srcset="assets/img/pao-de-queijo-739.webp">
+          <img src="assets/img/pao-de-queijo-739.jpg" width="739" height="1600" loading="lazy" decoding="async" alt="Basket of pão de queijo" data-i18n-attr="alt:altPaoShort">
+        </picture>
+        <span class="promo__body">
+          <span class="promo__kick" data-i18n="metaBreakfast">From 6:30 AM</span>
+          <span class="promo__title" data-i18n="promoBreakfast">Brazilian breakfast</span>
+          <span class="btn btn--white btn--sm promo__cta" data-i18n="ctaSeeBreakfast">See breakfast</span>
+        </span>
       </a>
     </li>
   </ul>
+</section>
+
+<!-- ================= MENU CATEGORIES (full menu: menu.html) ================= -->
+<section class="cats light" aria-labelledby="cats-title">
+  <header class="cats__head">
+    <h2 id="cats-title" class="big-title" data-reveal><span data-i18n="catsTitle1">Explore</span> <em data-i18n="catsTitle2">the menu</em></h2>
+    <a class="btn btn--red" href="menu.html" data-reveal data-i18n="ctaMenuFull">See the full menu</a>
+  </header>
+  <ul class="cat-grid">
+    <li class="cat" data-reveal>
+      <a href="menu.html#plates">
+        <span class="cat__media"><picture>
+          <source type="image/avif" srcset="assets/img/espetinho-prato-480.avif">
+          <source type="image/webp" srcset="assets/img/espetinho-prato-480.webp">
+          <img src="assets/img/espetinho-prato-480.jpg" width="480" height="600" loading="lazy" decoding="async" alt="Plate with a grilled beef skewer, beans, rice, pasta, lettuce, tomato, fried cassava and torresmo" data-i18n-attr="alt:altEspPrato">
+        </picture></span>
+        <span class="cat__name" data-i18n="tabPlates">House plates</span>
+      </a>
+    </li>
+    <li class="cat" data-reveal>
+      <a href="menu.html#buffet">
+        <span class="cat__media"><picture>
+          <source type="image/avif" srcset="assets/img/feijao-tropeiro-bandeja-400.avif">
+          <source type="image/webp" srcset="assets/img/feijao-tropeiro-bandeja-400.webp">
+          <img src="assets/img/feijao-tropeiro-bandeja-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Feijão tropeiro topped with boiled eggs" data-i18n-attr="alt:altTropeiro">
+        </picture></span>
+        <span class="cat__name" data-i18n="tabBuffet">Buffet</span>
+      </a>
+    </li>
+    <li class="cat" data-reveal>
+      <a href="menu.html#burgers">
+        <span class="cat__media"><picture>
+          <source type="image/avif" srcset="assets/img/burger-torre-400.avif">
+          <source type="image/webp" srcset="assets/img/burger-torre-400.webp">
+          <img src="assets/img/burger-torre-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Tall Brazilian burger with egg, cheese and lettuce, served with fries" data-i18n-attr="alt:altBurgerTorre">
+        </picture></span>
+        <span class="cat__name" data-i18n="tabBurgers">Brazilian Burgers</span>
+      </a>
+    </li>
+    <li class="cat" data-reveal>
+      <a href="menu.html#breakfast">
+        <span class="cat__media"><picture>
+          <source type="image/avif" srcset="assets/img/pao-de-sal-480.avif">
+          <source type="image/webp" srcset="assets/img/pao-de-sal-480.webp">
+          <img src="assets/img/pao-de-sal-480.jpg" width="480" height="600" loading="lazy" decoding="async" alt="Tray of golden Brazilian bread rolls fresh from the oven" data-i18n-attr="alt:altPaoSal">
+        </picture></span>
+        <span class="cat__name" data-i18n="tabBreakfast">Breakfast</span>
+      </a>
+    </li>
+    <li class="cat" data-reveal>
+      <a href="menu.html#desserts">
+        <span class="cat__media"><picture>
+          <source type="image/avif" srcset="assets/img/pudim-calda-400.avif">
+          <source type="image/webp" srcset="assets/img/pudim-calda-400.webp">
+          <img src="assets/img/pudim-calda-400.jpg" width="400" height="500" loading="lazy" decoding="async" alt="Whole pudim de leite glazed in caramel, seen from above" data-i18n-attr="alt:altPudimCalda">
+        </picture></span>
+        <span class="cat__name" data-i18n="tabSweets">Desserts</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= ORDER BAND ================= -->
+<section class="oband" aria-labelledby="oband-title">
+  <div class="oband__copy">
+    <h2 id="oband-title" class="big-title big-title--light" data-reveal><span data-i18n="obandTitle1">Call ahead.</span> <em data-i18n="obandTitle2">Pick it up hot.</em></h2>
+    <ul class="oband__list" data-reveal>
+      <li data-i18n="oband1">Order by phone — we’ll have it hot and ready for pickup</li>
+      <li data-i18n="oband2">Full plates to go: churrasco, mandioca, rice and all the sides</li>
+      <li data-i18n="oband3">Brazilian Burgers Thursday to Sunday, 5 – 10 PM</li>
+    </ul>
+    <div class="oband__ctas" data-reveal>
+      <button type="button" class="btn btn--gold btn--lg" data-open-order data-i18n="ctaOrder">Order now</button>
+      <a class="btn btn--line btn--lg" href="menu.html" data-i18n="ctaMenu">View menu</a>
+    </div>
+  </div>
+  <figure class="oband__media" data-reveal="clip">
+    <picture>
+      <source type="image/avif" srcset="assets/img/espetinho-viagem-924.avif">
+      <source type="image/webp" srcset="assets/img/espetinho-viagem-924.webp">
+      <img src="assets/img/espetinho-viagem-924.jpg" width="924" height="1155" loading="lazy" decoding="async" alt="Prato com espetinho packed to go: skewer, rice, beans, pasta, fried cassava and torresmo" data-i18n-attr="alt:altEspViagem">
+    </picture>
+  </figure>
 </section>
 
 <!-- ================= STORY ================= -->
@@ -358,7 +375,7 @@
 </section>
 
 <!-- ================= VISIT STRIP (details + map: contact.html) ================= -->
-<section class="vstrip" aria-labelledby="vs-title">
+<section class="vstrip light" aria-labelledby="vs-title">
   <div class="vstrip__info">
     <p class="kicker" data-reveal data-i18n="visitKicker">Visit us</p>
     <h2 id="vs-title" class="display display--xl" data-reveal><span data-i18n="visitTitle1">Come hungry.</span> <em data-i18n="visitTitle2">Leave like family.</em></h2>
@@ -436,6 +453,26 @@
   <p class="footer__legal">© <span data-year></span> Goianeiro Restaurant · Kirkland, WA</p>
 </footer>
 
+<!-- Mobile menu -->
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <button type="button" class="drawer__close" aria-label="Close menu" data-drawer-close>×</button>
+    <nav class="drawer__nav" aria-label="Mobile">
+      <a href="index.html" aria-current="page" data-i18n="navHome">Home</a>
+      <a href="menu.html" data-i18n="navMenu">Menu</a>
+      <a href="about.html" data-i18n="navAbout">About</a>
+      <a href="about.html#gallery" data-i18n="navGallery">Gallery</a>
+      <a href="reviews.html" data-nav-reviews data-i18n="navReviews">Reviews</a>
+      <a href="contact.html" data-i18n="navContact">Contact</a>
+    </nav>
+    <div class="drawer__foot">
+      <button type="button" class="btn btn--red btn--block" data-open-order data-i18n="ctaOrder">Order now</button>
+      <a class="btn btn--line btn--block" data-tel href="contact.html"><span data-i18n="ctaCall">Call now</span></a>
+      <p class="drawer__addr"><span data-addr-line1>14338 124th Ave NE</span><br><span data-addr-line2>Kirkland, WA 98034</span></p>
+    </div>
+  </div>
+</div>
+
 <!-- Mobile action bar -->
 <nav class="actionbar" aria-label="Quick actions">
   <button type="button" data-open-order>
@@ -484,6 +521,6 @@
   <p class="lightbox__count" data-lb-count></p>
 </dialog>
 
-<script src="assets/js/main.js?v=20261015" defer></script>
+<script src="assets/js/main.js?v=20261017b" defer></script>
 </body>
 </html>

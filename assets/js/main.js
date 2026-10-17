@@ -50,7 +50,11 @@
     skip: 'Pular para o conteúdo',
     brandSub: 'Restaurante',
     navMenu: 'Cardápio', navKitchen: 'Cozinha', navExperience: 'Experiência', navGallery: 'Galeria', navVisit: 'Visite',
-    navAbout: 'Sobre', navContact: 'Contato', fExplore: 'Explorar', ctaHoursMap: 'Horários, telefones e mapa', storyMore: 'Nossa história e cozinha',
+    navAbout: 'Sobre', navContact: 'Contato', navHome: 'Início', findUs: 'Kirkland, WA', pauseVideo: 'Pausar vídeo', playVideo: 'Tocar vídeo',
+    ctaSeeBurgers: 'Ver os hambúrgueres', ctaSeeBuffet: 'Ver o buffet', ctaSeeBreakfast: 'Ver o café da manhã',
+    promoBuffet: 'Buffet brasileiro quentinho', promoBreakfast: 'Café da manhã brasileiro', catsTitle1: 'Conheça', catsTitle2: 'o cardápio',
+    obandTitle1: 'Ligue antes.', obandTitle2: 'Retire quentinho.',
+    oband1: 'Peça por telefone — deixamos tudo quentinho e pronto para retirar', oband2: 'Pratos completos para viagem: churrasco, mandioca, arroz e todos os acompanhamentos', oband3: 'Hambúrguer brasileiro de quinta a domingo, das 17h às 22h', fExplore: 'Explorar', ctaHoursMap: 'Horários, telefones e mapa', storyMore: 'Nossa história e cozinha',
     hlPlates: 'Carne na brasa com todos os acompanhamentos no mesmo prato.', hlBuffet: 'Bandejas quentinhas de comida caseira de Minas e Goiás.',
     hlBurgers: 'Hambúrguer brasileiro caprichado: X-Tudo, X-Bacon e mais.', hlSweets: 'Pudim, pavê e copinhos.',
     altBurgerMilho: 'Hambúrguer brasileiro com carne, milho e alface', altBurgerTorre: 'Hambúrguer alto com ovo, queijo e alface, servido com batata frita',
@@ -193,6 +197,7 @@
     eNet: 'Não foi possível publicar agora. Verifique a conexão e tente de novo.',
   };
   const EN_EXTRA = {
+    playVideo: 'Play video', pauseVideo: 'Pause video',
     sheetKickerR: 'Reservations', sheetTitleR: 'Call to reserve',
     sheetTextR: 'Coming with a group or want to hold a table? Call and check availability with our team.',
     statusOpen: 'Open now · closes at {t}', statusOpensToday: 'Closed · opens today at {t}', statusOpensTomorrow: 'Closed · opens tomorrow at {t}',
@@ -344,7 +349,7 @@
   if (!liteMode) {
     const videoObs = new IntersectionObserver(entries => entries.forEach(e => {
       const v = e.target;
-      if (e.isIntersecting) { loadVideo(v); v.play().catch(() => {}); }
+      if (e.isIntersecting) { loadVideo(v); if (!v.dataset.userPaused) v.play().catch(() => {}); }
       else if (v.dataset.loaded) v.pause();
     }), { rootMargin: '200px 0px', threshold: 0.15 });
     autoplayVideos.forEach(v => videoObs.observe(v));
@@ -352,6 +357,33 @@
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) autoplayVideos.forEach(v => v.pause());
   });
+
+  /* ---------- hero film: pause / play (WCAG 2.2.2) ---------- */
+  const pauseBtn = $('[data-hero-pause]');
+  if (pauseBtn) {
+    const hv = $('.ohero__video');
+    if (liteMode || !hv) pauseBtn.hidden = true;
+    else pauseBtn.addEventListener('click', () => {
+      const paused = !hv.paused;
+      if (paused) { hv.pause(); hv.dataset.userPaused = '1'; } else { delete hv.dataset.userPaused; loadVideo(hv); hv.play().catch(() => {}); }
+      pauseBtn.setAttribute('aria-pressed', String(paused));
+      const lbl = $('span', pauseBtn); lbl.dataset.i18n = paused ? 'playVideo' : 'pauseVideo'; lbl.textContent = t(lbl.dataset.i18n);
+    });
+  }
+
+  /* ---------- mobile menu drawer ---------- */
+  const drawer = $('#drawer'), openBtn = $('[data-drawer-open]');
+  if (drawer && openBtn) {
+    const setOpen = on => {
+      drawer.hidden = !on; openBtn.setAttribute('aria-expanded', String(on));
+      document.documentElement.classList.toggle('drawer-open', on);
+      if (on) $('.drawer__close', drawer).focus(); else openBtn.focus();
+    };
+    openBtn.addEventListener('click', () => setOpen(true));
+    $$('[data-drawer-close]', drawer).forEach(b => b.addEventListener('click', () => setOpen(false)));
+    drawer.addEventListener('click', e => { if (e.target === drawer || e.target.closest('a') || e.target.closest('[data-open-order]')) setOpen(false); });
+    addEventListener('keydown', e => { if (e.key === 'Escape' && !drawer.hidden) setOpen(false); });
+  }
 
   /* ---------- hero 3D: pointer tilt, scroll depth, embers ---------- */
   const hero = $('[data-hero]');
@@ -465,6 +497,9 @@
       document.getElementById(tb.getAttribute('aria-controls')).hidden = !on;
     });
     if (focus) tab.focus();
+    // phones: the category chips scroll sideways, keep the chosen one in view
+    const bar = tab.parentElement;
+    if (bar.scrollWidth > bar.clientWidth) bar.scrollTo({ left: tab.offsetLeft - bar.offsetLeft - 16, behavior: reduceMotion ? 'auto' : 'smooth' });
   }
   const tabFromHash = () => { const tb = document.getElementById('tab-' + ({ desserts: 'sweets' }[location.hash.slice(1)] || location.hash.slice(1))); if (tb && tb.getAttribute('role') === 'tab') selectTab(tb); };
   tabFromHash();
