@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap">
-<link rel="stylesheet" href="assets/css/styles.css?v=20261017b">
+<link rel="stylesheet" href="assets/css/styles.css?v=20261019a">
 
 <script>document.documentElement.classList.replace('no-js','js')</script>
 </head>
@@ -143,6 +143,11 @@
       <span class="mtab__num">05</span>
       <span class="mtab__name" data-i18n="tabSweets">Desserts</span>
       <span class="mtab__meta" data-i18n="metaSweets">Ask for today’s selection</span>
+    </button>
+    <button role="tab" id="tab-sauce" aria-controls="panel-sauce" aria-selected="false" tabindex="-1">
+      <span class="mtab__num">06</span>
+      <span class="mtab__name" data-i18n="tabSauce">Hot sauce</span>
+      <span class="mtab__meta" data-i18n="metaSauce">New · made for Goianeiro</span>
     </button>
   </div>
 
@@ -613,6 +618,55 @@
     </div>
   </div>
 
+  <!-- Our hot sauce -->
+  <div class="panel" role="tabpanel" id="panel-sauce" aria-labelledby="tab-sauce" hidden>
+    <div class="mpanel">
+      <figure class="mpanel__media mpanel__media--video">
+        <div class="mvideo mvideo--tall">
+          <video data-autoplay muted loop playsinline preload="none" poster="assets/video/pimenta-fuego-poster.webp"
+            aria-label="Film: the Goianeiro Fuego hot sauce bottle revealed under studio light, next to two red chili peppers" data-i18n-attr="aria-label:altSauceVideo">
+            <source data-src="assets/video/pimenta-fuego.webm" type="video/webm">
+            <source data-src="assets/video/pimenta-fuego.mp4" type="video/mp4">
+          </video>
+          <button type="button" class="sauce__sound" data-sound aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path class="sauce__wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="sauce__x" d="m17 9.5 5 5m0-5-5 5"/></svg>
+            <span data-i18n="soundOn">Sound on</span>
+          </button>
+        </div>
+        <figcaption class="mvideo__cap"><span>Fuego</span> <span data-i18n="sauceCap">— the spiciest news at Goianeiro</span></figcaption>
+      </figure>
+      <div class="mpanel__body">
+        <header class="mpanel__head">
+          <h3 class="panel__title" data-i18n="sauceTitle">Our hot sauce</h3>
+          <p class="mpanel__when"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 4.5V8l2.5 1.5"/></svg><span data-i18n="metaSauce">New · made for Goianeiro</span></p>
+        </header>
+        <p class="panel__intro" data-i18n="sauceIntro">The spiciest news at Goianeiro: we now have our very own hot sauce. Something new for anyone who likes to give their meal that special touch.</p>
+        <ul class="dlist" data-zoom-group>
+          <li class="dcard">
+            <button type="button" class="dcard__media" data-type="image" data-full="assets/img/pimenta-fuego-full.webp" aria-label="View photos: Fuego Brazilian Hot Sauce">
+              <picture>
+            <source type="image/avif" srcset="assets/img/pimenta-fuego-480.avif 480w, assets/img/pimenta-fuego-960.avif 960w" sizes="(min-width: 900px) 170px, 120px">
+            <source type="image/webp" srcset="assets/img/pimenta-fuego-480.webp 480w, assets/img/pimenta-fuego-960.webp 960w" sizes="(min-width: 900px) 170px, 120px">
+            <img src="assets/img/pimenta-fuego-480.jpg" width="480" height="600" loading="lazy" decoding="async"
+              alt="Bottle of Goianeiro Fuego Brazilian Hot Sauce on a dark stone pedestal with two red chili peppers" data-i18n-attr="alt:altSauce">
+          </picture>
+              <span class="dcard__more" aria-hidden="true">+2</span>
+            </button>
+            <span hidden data-type="image" data-full="assets/img/pimenta-lancamento-1080.webp" data-alt="Launch poster: the spiciest news at Goianeiro has arrived" data-i18n-attr="data-alt:altSaucePoster"></span>
+            <span hidden data-type="video" data-full="assets/video/pimenta-fuego" data-poster="assets/video/pimenta-fuego-poster.webp" aria-label="Video: Fuego Brazilian Hot Sauce"></span>
+            <div class="dcard__body">
+              <p class="dcard__tags"><span class="tag tag--new" data-i18n="tagNew">New</span><span class="tag" data-i18n="tagOurs">Only at Goianeiro</span></p>
+              <h4 class="dcard__name">Fuego <em>Brazilian Hot Sauce</em></h4>
+              <p class="dcard__desc" data-i18n="sauceDesc">The Brazilian hot sauce with the Goianeiro name on the label.</p>
+              <p class="dcard__meta" data-i18n="sauceMeta">5 fl oz (148 mL) bottle</p>
+            </div>
+          </li>
+        </ul>
+        <p class="note" data-i18n="sauceNote">Ask our team about the Fuego hot sauce.</p>
+      </div>
+    </div>
+  </div>
+
   <div class="menu__foot">
     <button type="button" class="btn btn--gold" data-open-order data-i18n="ctaOrder">Order now</button>
     <a class="btn btn--line" data-tel href="contact.html"><span data-i18n="ctaCall">Call now</span></a>
@@ -735,6 +789,6 @@
   <p class="lightbox__count" data-lb-count></p>
 </dialog>
 
-<script src="assets/js/main.js?v=20261017b" defer></script>
+<script src="assets/js/main.js?v=20261019a" defer></script>
 </body>
 </html>

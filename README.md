@@ -50,6 +50,7 @@ Ready-to-use files in `brand/export/`:
 - **Story quote:** caption of the 15 Sep 2026 reel. "Melhor x-tudo de Seattle": caption of 16 Sep 2026.
 - **Address & phones:** caption of the 19 Sep 2026 post.
 - **Buffet dishes:** only dishes visible in the restaurant's reels/photos; no buffet prices are shown because none were published.
+- **Fuego hot sauce (Oct 2026):** the restaurant's own hot sauce. Home launch section (`#hot-sauce`) and menu tab 06 (`menu.html#sauce`). Photo and film are a 3D studio render built from the owner's photo of the real bottle; the label artwork is unchanged. Name, "Brazilian Hot Sauce" and 5 fl oz (148 mL) are read off the label. No price, heat level or ingredients were supplied, so none are shown. The film has a soundtrack and plays muted until the visitor taps "Sound on".
 - **House plates (Oct 2026 update):** photos and video sent by the owner: Prato com espetinho (plate, to-go box, beans-pour video), costelinha assada, carne com batata, pão de sal (from an Instagram story) and dessert cups. No prices were supplied, so none are shown.
 
 ## ⚠️ Please confirm before launch

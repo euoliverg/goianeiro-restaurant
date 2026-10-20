@@ -354,7 +354,7 @@ em { font-style: italic; }
 /* index-style tabs: number · name · when it's served */
 .mtabs {
   max-width: var(--maxw); margin: 0 auto clamp(2.4rem, 5vw, 4rem); padding: 0 var(--gutter);
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(6, 1fr);
 }
 .mtabs button {
   display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto auto; column-gap: 1rem; row-gap: .45rem; text-align: left;
@@ -1204,4 +1204,60 @@ html.drawer-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .ohero__video { animation: none; }
+}
+
+/* ---------- our hot sauce: launch feature (home) ---------- */
+.sauce {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(2rem, 6vw, 6rem); align-items: center;
+  padding: clamp(3rem, 5vw, 4.5rem) max(var(--gutter), calc((100vw - var(--maxw)) / 2 + var(--gutter)));
+  background: radial-gradient(60% 70% at 28% 45%, rgba(170, 72, 24, .28), transparent 70%), #130b08; color: #fff;
+}
+.sauce__media { display: flex; justify-content: center; }
+.sauce__film { position: relative; width: min(100%, 420px, calc((100svh - 170px) * 9 / 16)); aspect-ratio: 9 / 16; border-radius: var(--radius); overflow: hidden; background: #0d0806; box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .8), 0 0 0 1px rgba(239, 205, 133, .14); }
+.sauce__film video { width: 100%; height: 100%; object-fit: cover; }
+.sauce__sound {
+  position: absolute; right: 12px; bottom: 12px; display: inline-flex; align-items: center; gap: .5rem; min-height: 44px; padding: 0 1rem;
+  border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(13, 8, 6, .62); backdrop-filter: blur(6px); color: #fff;
+  font: 700 .72rem/1 var(--f-ui); letter-spacing: .08em; text-transform: uppercase; cursor: pointer; transition: background .3s var(--ease);
+}
+.sauce__sound:hover { background: rgba(13, 8, 6, .85); }
+.sauce__sound svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.sauce__sound svg path:first-child { fill: currentColor; }
+.sauce__sound .sauce__wave { display: none; }
+.sauce__sound[aria-pressed="true"] .sauce__wave { display: inline; }
+.sauce__sound[aria-pressed="true"] .sauce__x { display: none; }
+.sauce__kick { display: flex; align-items: center; gap: .9rem; margin: 0 0 1.3rem; font: 800 .74rem/1 var(--f-ui); letter-spacing: .24em; text-transform: uppercase; color: #f2cf86; }
+.sauce__new { background: #e2412b; color: #fff; padding: .45em .8em; border-radius: 999px; letter-spacing: .12em; }
+.sauce .big-title em { color: #e2412b; }
+.sauce__lede { margin: 1.4rem 0 0; max-width: 34rem; font-size: 1.12rem; color: rgba(255, 255, 255, .82); }
+.sauce__card { display: grid; grid-template-columns: 180px 1fr; gap: 1.6rem; align-items: center; margin-top: 2.2rem; padding: 1rem; border: 1px solid rgba(239, 205, 133, .18); border-radius: var(--radius); background: rgba(255, 255, 255, .03); max-width: 34rem; }
+.sauce__photo { display: block; padding: 0; border: 0; border-radius: 10px; overflow: hidden; cursor: zoom-in; background: #0d0806; }
+.sauce__photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: transform 1.2s var(--ease); }
+.sauce__photo:hover img { transform: scale(1.05); }
+.sauce__facts { margin: 0; display: grid; gap: .9rem; }
+.sauce__facts div { border-bottom: 1px solid rgba(239, 205, 133, .14); padding-bottom: .7rem; }
+.sauce__facts div:last-child { border: 0; padding-bottom: 0; }
+.sauce__facts dt { font: 700 .66rem/1.2 var(--f-ui); letter-spacing: .18em; text-transform: uppercase; color: #f2cf86; }
+.sauce__facts dd { margin: .3rem 0 0; font: 400 1.15rem/1.25 var(--f-display); color: #fff; }
+.sauce__ask { margin: 2rem 0 1.2rem; font: italic 400 clamp(1.5rem, 2.4vw, 2rem)/1.1 var(--f-display); color: #fff; }
+.sauce__ctas { display: flex; flex-wrap: wrap; gap: .8rem; }
+.sauce .btn--gold { background: #f2cf86; color: var(--on-gold); }
+
+/* menu page: the hot sauce panel shows the film in its own portrait shape */
+.mvideo--tall { aspect-ratio: 9 / 16; max-width: 400px; }
+.mvideo--tall::after { display: none; }
+
+@media (max-width: 899px) {
+  /* phones: name the product before the film plays */
+  .sauce { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .sauce__copy { display: contents; }
+  .sauce__kick { order: 1; }
+  .sauce .big-title { order: 2; margin-bottom: 1.8rem; }
+  .sauce__media { order: 3; }
+  .sauce__lede, .sauce__card, .sauce__ask, .sauce__ctas { order: 4; }
+  .sauce__film { width: min(100%, 360px); }
+  .sauce__card { grid-template-columns: 120px 1fr; gap: 1rem; }
+  .sauce__ctas .btn { flex: 1 1 auto; }
+  .menu.light .mpanel__media--video .mvideo--tall { aspect-ratio: 9 / 16; max-width: 270px; margin-inline: auto; }
+  .mvideo--tall + .mvideo__cap { text-align: center; }
 }

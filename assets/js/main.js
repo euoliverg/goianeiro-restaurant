@@ -85,6 +85,17 @@
     pEsp: 'Espetinho de carne na brasa com arroz, feijão, macarrão, alface e tomate, mandioca frita e torresmo pururuca.',
     pEspMeta: 'Para comer aqui ou levar',
     pMarmita: 'Churrasco fatiado, linguiça e frango assado com mandioca frita, arroz, macarrão e couve, embalado bem quentinho.',
+    sauceKicker: 'A pimenta chegou', sauceTitle1: 'Agora temos a nossa', sauceTitle2: 'própria pimenta.',
+    sauceLede: 'A novidade mais apimentada do Goianeiro chegou! Uma novidade para quem gosta de dar aquele toque especial à experiência gastronômica.',
+    sauceAsk: 'Você vai experimentar?', sauceName: 'Nome', sauceType: 'Molho de pimenta brasileiro', sauceSize: 'Garrafa', sauceBrand: 'Marca',
+    ctaSeeSauce: 'Ver no cardápio', soundOn: 'Ativar som', soundOff: 'Desativar som', tabSauce: 'Pimenta', metaSauce: 'Novo · feita para o Goianeiro',
+    sauceTitle: 'Nossa pimenta', sauceIntro: 'A novidade mais apimentada do Goianeiro: agora temos a nossa própria pimenta. Para quem gosta de dar aquele toque especial à experiência gastronômica.',
+    sauceDesc: 'O molho de pimenta brasileiro com o nome do Goianeiro no rótulo.', sauceMeta: 'Garrafa de 5 fl oz (148 mL)', sauceNote: 'Pergunte à nossa equipe sobre a pimenta Fuego.',
+    sauceCap: '— a novidade mais apimentada do Goianeiro', tagOurs: 'Exclusiva do Goianeiro',
+    altSauce: 'Garrafa da pimenta Fuego do Goianeiro sobre um pedestal escuro, com duas pimentas vermelhas',
+    altSaucePoster: 'Arte de lançamento: a novidade mais apimentada do Goianeiro chegou',
+    altSauceVideo: 'Filme: a garrafa da pimenta Fuego do Goianeiro revelada sob luz de estúdio, ao lado de duas pimentas vermelhas',
+    sauceZoom: 'Ver foto: pimenta Fuego',
     tagNew: 'Novo', tagGrill: 'Na brasa', tagSizzling: 'Na chapa quente', tagToGo: 'Para viagem',
     bName13: 'Costelinha assada', bDesc13: 'Costelinha de porco assada, bem temperada e finalizada com salsinha',
     sw4n: 'Copinhos de sobremesa', sw4: 'Sobremesas individuais para levar: pergunte os sabores do dia',
@@ -197,7 +208,7 @@
     eNet: 'Não foi possível publicar agora. Verifique a conexão e tente de novo.',
   };
   const EN_EXTRA = {
-    playVideo: 'Play video', pauseVideo: 'Pause video',
+    playVideo: 'Play video', pauseVideo: 'Pause video', soundOn: 'Sound on', soundOff: 'Sound off',
     sheetKickerR: 'Reservations', sheetTitleR: 'Call to reserve',
     sheetTextR: 'Coming with a group or want to hold a table? Call and check availability with our team.',
     statusOpen: 'Open now · closes at {t}', statusOpensToday: 'Closed · opens today at {t}', statusOpensTomorrow: 'Closed · opens tomorrow at {t}',
@@ -356,6 +367,19 @@
   }
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) autoplayVideos.forEach(v => v.pause());
+  });
+
+  /* ---------- films with a soundtrack: muted until the visitor asks ---------- */
+  $$('[data-sound]').forEach(btn => {
+    const v = $('video', btn.parentElement);
+    if (!v) return;
+    btn.addEventListener('click', () => {
+      const on = v.muted;
+      v.muted = !on;
+      if (on) { delete v.dataset.userPaused; loadVideo(v); v.currentTime = 0; v.play().catch(() => {}); }
+      btn.setAttribute('aria-pressed', String(on));
+      const lbl = $('span', btn); lbl.dataset.i18n = on ? 'soundOff' : 'soundOn'; lbl.textContent = t(lbl.dataset.i18n);
+    });
   });
 
   /* ---------- hero film: pause / play (WCAG 2.2.2) ---------- */
